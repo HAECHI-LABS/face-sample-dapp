@@ -17,24 +17,13 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <button onClick={() => {
-          setFace(new Face(Network.ROPSTEN, Blockchain.ETH, apiKey))
-        }}>
-          Initialize Face
-        </button>
-        {face && <button onClick={() => {face.auth.login().then(() => setLogin(true)).catch(e => console.error(e))}}>Login</button>}
+        {face == null &&<button onClick={() => {
+                          setFace(new Face(Network.ROPSTEN, Blockchain.ETH, apiKey))
+                        }}>
+                          Initialize Face
+                        </button>
+        }
+        {(face && !login) && <button onClick={() => {face.auth.login().then(() => setLogin(true)).catch(e => console.error(e))}}>Login</button>}
         {login && <button onClick={async () => {
             const provider = new providers.Web3Provider(face.getEthLikeProvider());
 
