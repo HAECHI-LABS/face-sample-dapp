@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/face-sample-dapps/static/css/main.073c9b0a.css",
+    "main.js": "/face-sample-dapps/static/js/main.c99a918e.js",
+    "static/js/787.5bc2412d.chunk.js": "/face-sample-dapps/static/js/787.5bc2412d.chunk.js",
+    "static/media/logo.svg": "/face-sample-dapps/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/face-sample-dapps/index.html",
+    "main.073c9b0a.css.map": "/face-sample-dapps/static/css/main.073c9b0a.css.map",
+    "main.c99a918e.js.map": "/face-sample-dapps/static/js/main.c99a918e.js.map",
+    "787.5bc2412d.chunk.js.map": "/face-sample-dapps/static/js/787.5bc2412d.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.073c9b0a.css",
+    "static/js/main.c99a918e.js"
+  ]
+}
