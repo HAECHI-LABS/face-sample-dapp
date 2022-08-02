@@ -25,7 +25,7 @@ function App() {
         }
         {(face && !login) && <button onClick={() => {face.auth.login().then(() => setLogin(true)).catch(e => console.error(e))}}>Login</button>}
         {login && <button onClick={async () => {
-            const provider = new providers.Web3Provider(face.getEthLikeProvider());
+            const provider = new providers.Web3Provider(face.getEthLikeProvider(), 'any');
 
             const signer = await provider.getSigner();
             const address = await signer.getAddress();
