@@ -18,7 +18,7 @@ function App() {
       <header className="App-header">
         {face == null &&<button onClick={() => {
                           setFace(new Face({
-                            network: Network.ETH_MAINNET,
+                            network: Network.ETH_TESTNET,
                             apiKey,
                           }))
                         }}>
