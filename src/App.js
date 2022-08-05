@@ -1,7 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
 import { Face, Network } from '@haechi-labs/face-sdk';
-import { Blockchain, Env } from '@haechi-labs/face-types';
 import { ethers, providers, utils } from 'ethers';
 import { useState } from 'react';
 
@@ -18,7 +17,10 @@ function App() {
     <div className="App">
       <header className="App-header">
         {face == null &&<button onClick={() => {
-                          setFace(new Face(Network.ROPSTEN, Blockchain.ETH, apiKey))
+                          setFace(new Face({
+                            network: Network.ETH_MAINNET,
+                            apiKey,
+                          }))
                         }}>
                           Initialize Face
                         </button>

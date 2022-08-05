@@ -4,8 +4,8 @@
   "private": true,
   "homepage": "http://haechi-labs.github.io/face-sample-dapp",
   "dependencies": {
-    "@haechi-labs/face-sdk": "^0.1.1",
-    "@haechi-labs/face-types": "^0.1.1",
+    "@haechi-labs/face-sdk": "^0.1.2",
+    "@haechi-labs/face-types": "^0.1.2",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
