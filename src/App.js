@@ -37,6 +37,7 @@ function App() {
             const balance = await signer.getBalance();
             console.log("balance is", balance);
             setBalance(balance.toString());
+            console.log("getCurrentUser", await face.auth.getCurrentUser());
           
         }}>Query Address And Balance</button>}
         {address && <p>Address: {address}</p>}
