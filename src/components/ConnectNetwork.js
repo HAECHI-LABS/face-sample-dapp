@@ -5,6 +5,7 @@ import { API_KEY } from '../config/apiKey';
 import { faceAtom } from '../store';
 import { networkAtom } from '../store/networkAtom';
 import Box from './common/Box';
+import Button from './common/Button';
 import Message from './common/Message';
 
 const title = 'Connect Network';
@@ -32,18 +33,18 @@ function ConnectNetwork() {
 
   return (
     <Box title={title}>
-      <button className="button" onClick={() => connectTo(Network.ETH_TESTNET)}>
+      <Button onClick={() => connectTo(Network.ETH_TESTNET)}>
         Connect to Ether Testnet
-      </button>
-      <button className="button" onClick={() => connectTo(Network.ETH_MAINNET)}>
+      </Button>
+      <Button onClick={() => connectTo(Network.ETH_MAINNET)}>
         Connect to Ether Mainnet
-      </button>
-      <button className="button" onClick={() => connectTo(Network.MATIC_TESTNET)}>
+      </Button>
+      <Button onClick={() => connectTo(Network.MATIC_TESTNET)}>
         Connect to Polygon Testnet
-      </button>
-      <button className="button" onClick={() => connectTo(Network.MATIC_MAINNET)}>
+      </Button>
+      <Button onClick={() => connectTo(Network.MATIC_MAINNET)}>
         Connect to Polygon Mainnet
-      </button>
+      </Button>
     </Box>
   );
 }

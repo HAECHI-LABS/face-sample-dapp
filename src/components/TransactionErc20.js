@@ -8,6 +8,7 @@ import { faceAtom } from '../store';
 import { accountAtom } from '../store/accountAtom';
 import { networkAtom } from '../store/networkAtom';
 import Box from './common/Box';
+import Button from './common/Button';
 import Message from './common/Message';
 
 const erc20ContractDataMap = {
@@ -64,9 +65,10 @@ function TransactionErc20() {
 
   return (
     <Box title={title}>
-      <button className="button" onClick={sendTransaction}>
+      <input className="input" />
+      <Button onClick={sendTransaction}>
         Transfer 0.0001 {erc20ContractDataMap[network].symbol} to me
-      </button>
+      </Button>
       {txHash && (
         <>
           <Message type="info">Hash: {txHash}</Message>

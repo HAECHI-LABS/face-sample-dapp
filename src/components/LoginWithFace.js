@@ -5,6 +5,7 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { faceAtom } from '../store';
 import { accountAtom } from '../store/accountAtom';
 import Box from './common/Box';
+import Button from './common/Button';
 import Message from './common/Message';
 
 const title = 'Log in';
@@ -64,18 +65,14 @@ function LoginWithFace() {
       {isLoggedIn ? (
         <Message type="info">Log in succeed</Message>
       ) : (
-        <button className="button" onClick={() => login().then(() => setIsLoggedIn(true))}>
+        <Button onClick={() => login().then(() => setIsLoggedIn(true))}>
           Log in with Face wallet
-        </button>
+        </Button>
       )}
       {isLoggedIn && (
         <>
-          <button className="button" onClick={() => getAccountInfo().then(setAccount)}>
-            Get account information
-          </button>
-          <button className="button" onClick={() => logout()}>
-            Log out
-          </button>
+          <Button onClick={() => getAccountInfo().then(setAccount)}>Get account information</Button>
+          <Button onClick={() => logout()}>Log out</Button>
         </>
       )}
     </Box>

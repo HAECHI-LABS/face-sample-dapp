@@ -3,6 +3,7 @@ import { useRecoilValue } from 'recoil';
 
 import { faceAtom } from '../store';
 import Box from './common/Box';
+import Button from './common/Button';
 import Message from './common/Message';
 
 const title = 'Wallet Connect';
@@ -33,9 +34,7 @@ function WalletConnect() {
 
   return (
     <Box title={title}>
-      <button className="button" onClick={() => face.wc.connectOpensea()}>
-        Connect Opensea with Wallet Connect
-      </button>
+      <Button onClick={() => face.wc.connectOpensea()}>Connect Opensea with Wallet Connect</Button>
     </Box>
   );
 }

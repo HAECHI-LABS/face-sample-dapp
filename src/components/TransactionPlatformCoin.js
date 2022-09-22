@@ -5,6 +5,7 @@ import { useRecoilValue } from 'recoil';
 import { faceAtom } from '../store';
 import { accountAtom } from '../store/accountAtom';
 import Box from './common/Box';
+import Button from './common/Button';
 import Message from './common/Message';
 
 const title = 'Platform Coin Transaction';
@@ -47,9 +48,7 @@ function TransactionPlatformCoin() {
 
   return (
     <Box title={title}>
-      <button className="button" onClick={sendTransaction}>
-        Transfer 0.0001 ETH to me
-      </button>
+      <Button onClick={sendTransaction}>Transfer 0.0001 ETH to me</Button>
       {txHash && (
         <>
           <Message type="info">Hash: {txHash}</Message>
