@@ -6,6 +6,7 @@ import ConnectNetwork from './components/ConnectNetwork';
 import LoginWithFace from './components/LoginWithFace';
 import TransactionErc20 from './components/TransactionErc20';
 import TransactionPlatformCoin from './components/TransactionPlatformCoin.js';
+import WalletConnect from './components/WalletConnect';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <div className="wrapper">
         <ConnectNetwork />
         <LoginWithFace />
+        <WalletConnect />
         <TransactionPlatformCoin />
         <TransactionErc20 />
       </div>

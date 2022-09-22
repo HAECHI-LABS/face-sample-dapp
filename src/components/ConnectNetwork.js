@@ -7,6 +7,7 @@ import { networkAtom } from '../store/networkAtom';
 import Box from './common/Box';
 import Message from './common/Message';
 
+const title = 'Connect Network';
 function ConnectNetwork() {
   const [face, setFace] = useRecoilState(faceAtom);
   const [, setNetwork] = useRecoilState(networkAtom);
@@ -21,26 +22,28 @@ function ConnectNetwork() {
     setFace(face);
   };
 
-  return (
-    <Box title="Connect Network">
-      {face ? (
+  if (face) {
+    return (
+      <Box title={title}>
         <Message type="info">Connected</Message>
-      ) : (
-        <>
-          <button className="button" onClick={() => connectTo(Network.ETH_TESTNET)}>
-            Connect to Ether Testnet
-          </button>
-          <button className="button" onClick={() => connectTo(Network.ETH_MAINNET)}>
-            Connect to Ether Mainnet
-          </button>
-          <button className="button" onClick={() => connectTo(Network.MATIC_TESTNET)}>
-            Connect to Polygon Testnet
-          </button>
-          <button className="button" onClick={() => connectTo(Network.MATIC_MAINNET)}>
-            Connect to Polygon Mainnet
-          </button>
-        </>
-      )}
+      </Box>
+    );
+  }
+
+  return (
+    <Box title={title}>
+      <button className="button" onClick={() => connectTo(Network.ETH_TESTNET)}>
+        Connect to Ether Testnet
+      </button>
+      <button className="button" onClick={() => connectTo(Network.ETH_MAINNET)}>
+        Connect to Ether Mainnet
+      </button>
+      <button className="button" onClick={() => connectTo(Network.MATIC_TESTNET)}>
+        Connect to Polygon Testnet
+      </button>
+      <button className="button" onClick={() => connectTo(Network.MATIC_MAINNET)}>
+        Connect to Polygon Mainnet
+      </button>
     </Box>
   );
 }
