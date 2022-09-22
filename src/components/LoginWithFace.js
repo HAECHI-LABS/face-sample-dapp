@@ -1,5 +1,5 @@
 import { providers } from 'ethers';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 
 import { faceAtom } from '../store';
@@ -14,19 +14,11 @@ function LoginWithFace() {
   const [, setAccount] = useRecoilState(accountAtom);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  useEffect(() => {
-    if (!face) {
-      return;
-    }
-
-    face.auth.isLoggedIn().then((result) => setIsLoggedIn(result));
-  }, [face]);
-
   async function login() {
     const res = await face.auth.login();
     console.log('Login response:', res);
 
-    return res;
+    setIsLoggedIn(true);
   }
 
   async function logout() {
@@ -35,7 +27,7 @@ function LoginWithFace() {
     setAccount({});
   }
 
-  async function getAccountInfo() {
+  const getAccountInfo = useCallback(async () => {
     const provider = new providers.Web3Provider(face.getEthLikeProvider(), 'any');
 
     const signer = await provider.getSigner();
@@ -49,8 +41,22 @@ function LoginWithFace() {
     console.log('Current user:', user);
     console.groupEnd();
 
-    return { address, balance: balance.toString(), user };
-  }
+    setAccount({ address, balance: balance.toString(), user });
+  }, [face, setAccount]);
+
+  useEffect(() => {
+    if (!face) {
+      return;
+    }
+
+    face.auth.isLoggedIn().then((result) => {
+      setIsLoggedIn(result);
+
+      if (result) {
+        getAccountInfo();
+      }
+    });
+  }, [face, getAccountInfo]);
 
   if (!face) {
     return (
@@ -63,17 +69,13 @@ function LoginWithFace() {
   return (
     <Box title={title}>
       {isLoggedIn ? (
-        <Message type="info">Log in succeed</Message>
-      ) : (
-        <Button onClick={() => login().then(() => setIsLoggedIn(true))}>
-          Log in with Face wallet
-        </Button>
-      )}
-      {isLoggedIn && (
         <>
-          <Button onClick={() => getAccountInfo().then(setAccount)}>Get account information</Button>
-          <Button onClick={() => logout()}>Log out</Button>
+          <Message type="info">Log in succeed</Message>
+          <Button onClick={getAccountInfo}>Get account information</Button>
+          <Button onClick={logout}>Log out</Button>
         </>
+      ) : (
+        <Button onClick={login}>Log in with Face wallet</Button>
       )}
     </Box>
   );
