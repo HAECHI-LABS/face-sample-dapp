@@ -39,3 +39,14 @@
   padding: 12px 20px !important;
   word-break: break-all;
 }
+
+.field.is-horizontal {
+  align-items: center;
+}
+.field.is-horizontal .field-label {
+  flex-basis: 70px;
+  flex-grow: unset;
+  flex-shrink: unset;
+  margin-right: 15px;
+  font-weight: 500;
+}

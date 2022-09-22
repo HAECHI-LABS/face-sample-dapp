@@ -1,6 +1,6 @@
 import { Network } from '@haechi-labs/face-sdk';
 import { providers, utils } from 'ethers';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 
 import { makeERC20Data } from '../lib/utils';
@@ -9,6 +9,7 @@ import { accountAtom } from '../store/accountAtom';
 import { networkAtom } from '../store/networkAtom';
 import Box from './common/Box';
 import Button from './common/Button';
+import Field from './common/Field';
 import Message from './common/Message';
 
 const erc20ContractDataMap = {
@@ -24,6 +25,23 @@ function TransactionErc20() {
   const account = useRecoilValue(accountAtom);
   const network = useRecoilValue(networkAtom);
   const [txHash, setTxHash] = useState('');
+  const [amount, setAmount] = useState('0.001');
+  const [contractAddress, setContractAddress] = useState('');
+  const [receiverAddress, setReceiverAddress] = useState('');
+
+  useEffect(() => {
+    // Set receiver to user account
+    if (account.address) {
+      setReceiverAddress(account.address);
+    }
+  }, [account.address]);
+
+  useEffect(() => {
+    // Set default contract address
+    if (network) {
+      setContractAddress(erc20ContractDataMap[network].address);
+    }
+  }, [network]);
 
   async function sendTransaction() {
     const provider = new providers.Web3Provider(face.getEthLikeProvider(), 'any');
@@ -36,7 +54,7 @@ function TransactionErc20() {
       data: makeERC20Data(
         erc20ContractDataMap[network].address,
         myAddress,
-        utils.parseUnits('0.0001')
+        utils.parseUnits(amount)
       ),
     });
 
@@ -65,9 +83,25 @@ function TransactionErc20() {
 
   return (
     <Box title={title}>
-      <input className="input" />
+      <Field label="Amount">
+        <input className="input" value={amount} onChange={(e) => setAmount(e.target.value)} />
+      </Field>
+      <Field label="Contract Address">
+        <input
+          className="input"
+          value={contractAddress}
+          onChange={(e) => setContractAddress(e.target.value)}
+        />
+      </Field>
+      <Field label="Receiver Address">
+        <input
+          className="input"
+          value={receiverAddress}
+          onChange={(e) => setReceiverAddress(e.target.value)}
+        />
+      </Field>
       <Button onClick={sendTransaction}>
-        Transfer 0.0001 {erc20ContractDataMap[network].symbol} to me
+        Transfer {amount} {erc20ContractDataMap[network].symbol} to me
       </Button>
       {txHash && (
         <>

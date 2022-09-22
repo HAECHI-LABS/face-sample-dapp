@@ -1,11 +1,12 @@
 import { providers, utils } from 'ethers';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 
 import { faceAtom } from '../store';
 import { accountAtom } from '../store/accountAtom';
 import Box from './common/Box';
 import Button from './common/Button';
+import Field from './common/Field';
 import Message from './common/Message';
 
 const title = 'Platform Coin Transaction';
@@ -13,14 +14,23 @@ function TransactionPlatformCoin() {
   const face = useRecoilValue(faceAtom);
   const account = useRecoilValue(accountAtom);
   const [txHash, setTxHash] = useState('');
+  const [amount, setAmount] = useState('0.001');
+  const [receiverAddress, setReceiverAddress] = useState('');
+
+  useEffect(() => {
+    // Set receiver to user account
+    if (account.address) {
+      setReceiverAddress(account.address);
+    }
+  }, [account.address]);
 
   async function sendTransaction() {
     const provider = new providers.Web3Provider(face.getEthLikeProvider(), 'any');
 
     const signer = await provider.getSigner();
     const result = await signer.sendTransaction({
-      to: await signer.getAddress(),
-      value: utils.parseEther('0.0001'),
+      to: receiverAddress,
+      value: utils.parseEther(amount),
     });
 
     setTxHash(result.hash);
@@ -48,6 +58,16 @@ function TransactionPlatformCoin() {
 
   return (
     <Box title={title}>
+      <Field label="Amount">
+        <input className="input" value={amount} onChange={(e) => setAmount(e.target.value)} />
+      </Field>
+      <Field label="Receiver Address">
+        <input
+          className="input"
+          value={receiverAddress}
+          onChange={(e) => setReceiverAddress(e.target.value)}
+        />
+      </Field>
       <Button onClick={sendTransaction}>Transfer 0.0001 ETH to me</Button>
       {txHash && (
         <>
