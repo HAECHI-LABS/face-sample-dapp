@@ -3,7 +3,7 @@ import { providers, utils } from 'ethers';
 import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 
-import { makeERC20Data } from '../lib/utils';
+import { makeErc20Data } from '../lib/utils';
 import { faceAtom } from '../store';
 import { accountAtom } from '../store/accountAtom';
 import { networkAtom } from '../store/networkAtom';
@@ -12,11 +12,11 @@ import Button from './common/Button';
 import Field from './common/Field';
 import Message from './common/Message';
 
-const erc20ContractDataMap = {
-  [Network.ETH_MAINNET]: { symbol: 'EVT', address: '0x8A904F0Fb443D62B6A2835483b087aBECF93a137' },
-  [Network.ETH_TESTNET]: { symbol: 'FCT', address: '0x6558820324875d2747a32B7D37496fd473AD7648' },
-  [Network.MATIC_MAINNET]: { symbol: 'FCT', address: '0xfce04dd232006d0da001f6d54bb5a7fc969dbc08' },
-  [Network.MATIC_TESTNET]: { symbol: 'FCT', address: '0xfce04dd232006d0da001f6d54bb5a7fc969dbc08' },
+const erc20ContractAddressMap = {
+  [Network.ETH_MAINNET]: '0x8A904F0Fb443D62B6A2835483b087aBECF93a137',
+  [Network.ETH_TESTNET]: '0x6558820324875d2747a32B7D37496fd473AD7648',
+  [Network.MATIC_MAINNET]: '0xfce04dd232006d0da001f6d54bb5a7fc969dbc08',
+  [Network.MATIC_TESTNET]: '0xfce04dd232006d0da001f6d54bb5a7fc969dbc08',
 };
 
 const title = 'ERC20 Transaction';
@@ -39,23 +39,31 @@ function TransactionErc20() {
   useEffect(() => {
     // Set default contract address
     if (network) {
-      setContractAddress(erc20ContractDataMap[network].address);
+      setContractAddress(erc20ContractAddressMap[network]);
     }
   }, [network]);
 
   async function sendTransaction() {
+    if (!amount) {
+      alert('Please enter amount');
+      return;
+    }
+    if (!contractAddress) {
+      alert('Please enter contract address');
+      return;
+    }
+    if (!receiverAddress) {
+      alert('Please enter receiver address');
+      return;
+    }
+
     const provider = new providers.Web3Provider(face.getEthLikeProvider(), 'any');
 
     const signer = await provider.getSigner();
-    const myAddress = await signer.getAddress();
     const result = await signer.sendTransaction({
-      to: erc20ContractDataMap[network].address,
+      to: receiverAddress,
       value: '0x0',
-      data: makeERC20Data(
-        erc20ContractDataMap[network].address,
-        myAddress,
-        utils.parseUnits(amount)
-      ),
+      data: makeErc20Data('transfer', receiverAddress, utils.parseUnits(amount)),
     });
 
     setTxHash(result.hash);
@@ -100,9 +108,7 @@ function TransactionErc20() {
           onChange={(e) => setReceiverAddress(e.target.value)}
         />
       </Field>
-      <Button onClick={sendTransaction}>
-        Transfer {amount} {erc20ContractDataMap[network].symbol} to me
-      </Button>
+      <Button onClick={sendTransaction}>Transfer {amount} ERC20 token</Button>
       {txHash && (
         <>
           <Message type="info">Hash: {txHash}</Message>

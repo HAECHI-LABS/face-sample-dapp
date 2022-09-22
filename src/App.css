@@ -22,6 +22,7 @@
   margin: 0 !important;
 }
 .box__title {
+  color: #4a4a4a;
   margin: 0 !important;
 }
 .box__body {
@@ -48,5 +49,8 @@
   flex-grow: unset;
   flex-shrink: unset;
   margin-right: 15px;
+}
+.field.is-horizontal .field-label .label {
   font-weight: 500;
+  color: #4a4a4a;
 }

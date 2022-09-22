@@ -5,6 +5,7 @@ import AccountInformation from './components/AccountInformation';
 import ConnectNetwork from './components/ConnectNetwork';
 import LoginWithFace from './components/LoginWithFace';
 import TransactionErc20 from './components/TransactionErc20';
+import TransactionErc721 from './components/TransactionErc721';
 import TransactionPlatformCoin from './components/TransactionPlatformCoin.js';
 import WalletConnect from './components/WalletConnect';
 
@@ -19,6 +20,7 @@ function App() {
         <WalletConnect />
         <TransactionPlatformCoin />
         <TransactionErc20 />
+        <TransactionErc721 />
       </div>
     </div>
   );

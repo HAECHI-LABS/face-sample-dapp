@@ -1,4 +1,4 @@
-function Button({ type = 'light', children, ...rest }) {
+function Button({ type, children, ...rest }) {
   return (
     <div className={`button ${type ? 'is-' + type : ''}`} {...rest}>
       {children}
