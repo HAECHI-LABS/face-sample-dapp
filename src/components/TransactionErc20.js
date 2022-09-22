@@ -1,13 +1,14 @@
-import { useState } from 'react';
-import { providers, utils } from 'ethers';
-import { useRecoilValue } from 'recoil';
 import { Network } from '@haechi-labs/face-sdk';
+import { providers, utils } from 'ethers';
+import { useState } from 'react';
+import { useRecoilValue } from 'recoil';
 
-import Box from './Box';
+import { makeERC20Data } from '../lib/utils';
 import { faceAtom } from '../store';
 import { accountAtom } from '../store/accountAtom';
 import { networkAtom } from '../store/networkAtom';
-import { makeERC20Data } from '../lib/utils';
+import Box from './common/Box';
+import Message from './common/Message';
 
 const erc20ContractDataMap = {
   [Network.ETH_MAINNET]: { symbol: 'EVT', address: '0x8A904F0Fb443D62B6A2835483b087aBECF93a137' },
@@ -49,34 +50,34 @@ function TransactionErc20() {
   if (!face) {
     return (
       <Box title={title}>
-        <div className="alert danger">You must connect to the network first.</div>
+        <Message type="danger">You must connect to the network first.</Message>
       </Box>
     );
   }
   if (!account.balance || !account.address) {
     return (
       <Box title={title}>
-        <div className="alert danger">You must log in and get account first.</div>
+        <Message type="danger">You must log in and get account first.</Message>
       </Box>
     );
   }
 
   return (
     <Box title={title}>
-      <button onClick={sendTransaction}>
+      <button className="button" onClick={sendTransaction}>
         Transfer 0.0001 {erc20ContractDataMap[network].symbol} to me
       </button>
       {txHash && (
         <>
-          <div className="alert info">Hash: {txHash}</div>
-          <div className="alert info">
+          <Message type="info">Hash: {txHash}</Message>
+          <Message type="info">
             <a
               href={`https://ropsten.etherscan.io/tx/${txHash}`}
               rel="noopener noreferrer"
               target="_blank">
               Ropsten Link
             </a>
-          </div>
+          </Message>
         </>
       )}
     </Box>

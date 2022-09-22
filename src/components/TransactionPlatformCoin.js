@@ -1,10 +1,11 @@
-import { useState } from 'react';
 import { providers, utils } from 'ethers';
+import { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 
-import Box from './Box';
 import { faceAtom } from '../store';
 import { accountAtom } from '../store/accountAtom';
+import Box from './common/Box';
+import Message from './common/Message';
 
 const title = 'Platform Coin Transaction';
 function TransactionPlatformCoin() {
@@ -32,32 +33,34 @@ function TransactionPlatformCoin() {
   if (!face) {
     return (
       <Box title={title}>
-        <div className="alert danger">You must connect to the network first.</div>
+        <Message type="danger">You must connect to the network first.</Message>
       </Box>
     );
   }
   if (!account.balance || !account.address) {
     return (
       <Box title={title}>
-        <div className="alert danger">You must log in and get account first.</div>
+        <Message type="danger">You must log in and get account first.</Message>
       </Box>
     );
   }
 
   return (
     <Box title={title}>
-      <button onClick={sendTransaction}>Transfer 0.0001 ETH to me</button>
+      <button className="button" onClick={sendTransaction}>
+        Transfer 0.0001 ETH to me
+      </button>
       {txHash && (
         <>
-          <div className="alert info">Hash: {txHash}</div>
-          <div className="alert info">
+          <Message type="info">Hash: {txHash}</Message>
+          <Message type="info">
             <a
               href={`https://ropsten.etherscan.io/tx/${txHash}`}
               rel="noopener noreferrer"
               target="_blank">
               Ropsten Link
             </a>
-          </div>
+          </Message>
         </>
       )}
     </Box>

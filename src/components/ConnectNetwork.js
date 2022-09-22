@@ -1,10 +1,11 @@
-import { useRecoilState } from 'recoil';
 import { Face, Network } from '@haechi-labs/face-sdk';
+import { useRecoilState } from 'recoil';
 
-import Box from './Box';
-import { faceAtom } from '../store';
 import { API_KEY } from '../config/apiKey';
+import { faceAtom } from '../store';
 import { networkAtom } from '../store/networkAtom';
+import Box from './common/Box';
+import Message from './common/Message';
 
 function ConnectNetwork() {
   const [face, setFace] = useRecoilState(faceAtom);
@@ -23,15 +24,19 @@ function ConnectNetwork() {
   return (
     <Box title="Connect Network">
       {face ? (
-        <div className="alert info">Connected</div>
+        <Message type="info">Connected</Message>
       ) : (
         <>
-          <button onClick={() => connectTo(Network.ETH_TESTNET)}>Connect to Ether Testnet</button>
-          <button onClick={() => connectTo(Network.ETH_MAINNET)}>Connect to Ether Mainnet</button>
-          <button onClick={() => connectTo(Network.MATIC_TESTNET)}>
+          <button className="button" onClick={() => connectTo(Network.ETH_TESTNET)}>
+            Connect to Ether Testnet
+          </button>
+          <button className="button" onClick={() => connectTo(Network.ETH_MAINNET)}>
+            Connect to Ether Mainnet
+          </button>
+          <button className="button" onClick={() => connectTo(Network.MATIC_TESTNET)}>
             Connect to Polygon Testnet
           </button>
-          <button onClick={() => connectTo(Network.MATIC_MAINNET)}>
+          <button className="button" onClick={() => connectTo(Network.MATIC_MAINNET)}>
             Connect to Polygon Mainnet
           </button>
         </>

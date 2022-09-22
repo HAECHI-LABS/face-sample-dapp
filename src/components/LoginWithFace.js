@@ -1,10 +1,11 @@
-import { useState, useEffect } from 'react';
 import { providers, utils } from 'ethers';
+import { useEffect, useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 
-import Box from './Box';
 import { faceAtom } from '../store';
 import { accountAtom } from '../store/accountAtom';
+import Box from './common/Box';
+import Message from './common/Message';
 
 const title = 'Login';
 function LoginWithFace() {
@@ -47,7 +48,7 @@ function LoginWithFace() {
   if (!face) {
     return (
       <Box title={title}>
-        <div className="alert danger">You must connect to the network first.</div>
+        <Message type="danger">You must connect to the network first.</Message>
       </Box>
     );
   }
@@ -55,19 +56,21 @@ function LoginWithFace() {
   return (
     <Box title={title}>
       {isLoggedIn ? (
-        <div className="alert info">Log-in succeed</div>
+        <Message type="info">Log-in succeed</Message>
       ) : (
-        <button onClick={() => login().then(() => setIsLoggedIn(true))}>
+        <button className="button" onClick={() => login().then(() => setIsLoggedIn(true))}>
           Login with Face wallet
         </button>
       )}
       {isLoggedIn && (
-        <button onClick={() => getAccountInfo().then(setAccount)}>Get account information</button>
+        <button className="button" onClick={() => getAccountInfo().then(setAccount)}>
+          Get account information
+        </button>
       )}
 
-      {account.address && <div className="alert info">Address: {account.address}</div>}
+      {account.address && <Message type="info">Address: {account.address}</Message>}
       {account.balance && (
-        <div className="alert info">Balance: {utils.formatEther(account.balance)}</div>
+        <Message type="info">Balance: {utils.formatEther(account.balance)}</Message>
       )}
     </Box>
   );
