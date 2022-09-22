@@ -4,6 +4,7 @@ import { ReactComponent as Logo } from './assets/logo-solid.svg';
 import AccountInformation from './components/AccountInformation';
 import ConnectNetwork from './components/ConnectNetwork';
 import LoginWithFace from './components/LoginWithFace';
+import TransactionContractCall from './components/TransactionContractCall';
 import TransactionErc20 from './components/TransactionErc20';
 import TransactionErc721 from './components/TransactionErc721';
 import TransactionPlatformCoin from './components/TransactionPlatformCoin.js';
@@ -21,6 +22,7 @@ function App() {
         <TransactionPlatformCoin />
         <TransactionErc20 />
         <TransactionErc721 />
+        <TransactionContractCall />
       </div>
     </div>
   );
