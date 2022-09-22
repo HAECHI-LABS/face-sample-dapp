@@ -3,8 +3,15 @@
   padding: 60px;
 }
 
-.container {
-  margin-top: 60px;
+.AccountInformation {
+  margin-top: 25px;
+}
+.AccountInformation .notification {
+  box-shadow: 0 0.5em 1em -0.125em rgb(10 10 10 / 10%), 0 0px 0 1px rgb(10 10 10 / 2%);
+}
+
+.wrapper {
+  margin-top: 35px;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
   text-align: center;
@@ -12,59 +19,38 @@
 }
 
 .box {
-  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
-  border-radius: 10px;
-  padding: 26px 36px 32px;
+  margin: 0 !important;
 }
 .box__title {
-  margin: 0;
+  color: #4a4a4a;
+  margin: 0 !important;
 }
 .box__body {
   padding-top: 32px;
+  padding-bottom: 28px;
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-button {
-  width: 100%;
-  padding: 15px 20px;
-  word-break: break-word;
-  color: #333;
-  display: inline-block;
-  text-align: center;
-  vertical-align: middle;
-  user-select: none;
-  border: none;
-  font-size: 1.1rem;
-  line-height: 1.5;
-  border-radius: 5px;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  background: #eee;
+.message {
+  margin: 0 !important;
 }
-button:hover {
-  background: #ddd;
-}
-button:active {
-  background: #ccc;
-}
-
-/**** Alert ****/
-.alert {
-  position: relative;
-  padding: 12px 20px;
-  border: 1px solid transparent;
-  border-radius: 5px;
+.message-body {
+  padding: 12px 20px !important;
   word-break: break-all;
 }
-.alert.info {
-  color: #0c5460;
-  background-color: #d1ecf1;
-  border-color: #bee5eb;
+
+.field.is-horizontal {
+  align-items: center;
 }
-.alert.danger {
-  color: #721c24;
-  background-color: #f8d7da;
-  border-color: #f5c6cb;
+.field.is-horizontal .field-label {
+  flex-basis: 70px;
+  flex-grow: unset;
+  flex-shrink: unset;
+  margin-right: 15px;
+}
+.field.is-horizontal .field-label .label {
+  font-weight: 500;
+  color: #4a4a4a;
 }

@@ -1,33 +1,33 @@
-import { useState, useEffect } from 'react';
-import { providers, utils } from 'ethers';
+import { providers } from 'ethers';
+import { useCallback, useEffect, useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 
-import Box from './Box';
 import { faceAtom } from '../store';
 import { accountAtom } from '../store/accountAtom';
+import Box from './common/Box';
+import Button from './common/Button';
+import Message from './common/Message';
 
-const title = 'Login';
+const title = 'Log in';
 function LoginWithFace() {
   const face = useRecoilValue(faceAtom);
-  const [account, setAccount] = useRecoilState(accountAtom);
+  const [, setAccount] = useRecoilState(accountAtom);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  useEffect(() => {
-    if (!face) {
-      return;
-    }
-
-    face.auth.isLoggedIn().then((result) => setIsLoggedIn(result));
-  }, [face]);
 
   async function login() {
     const res = await face.auth.login();
     console.log('Login response:', res);
 
-    return res;
+    setIsLoggedIn(true);
   }
 
-  async function getAccountInfo() {
+  async function logout() {
+    await face.auth.logout();
+    setIsLoggedIn(false);
+    setAccount({});
+  }
+
+  const getAccountInfo = useCallback(async () => {
     const provider = new providers.Web3Provider(face.getEthLikeProvider(), 'any');
 
     const signer = await provider.getSigner();
@@ -41,13 +41,27 @@ function LoginWithFace() {
     console.log('Current user:', user);
     console.groupEnd();
 
-    return { address, balance: balance.toString(), user };
-  }
+    setAccount({ address, balance: balance.toString(), user });
+  }, [face, setAccount]);
+
+  useEffect(() => {
+    if (!face) {
+      return;
+    }
+
+    face.auth.isLoggedIn().then((result) => {
+      setIsLoggedIn(result);
+
+      if (result) {
+        getAccountInfo();
+      }
+    });
+  }, [face, getAccountInfo]);
 
   if (!face) {
     return (
       <Box title={title}>
-        <div className="alert danger">You must connect to the network first.</div>
+        <Message type="danger">You must connect to the network first.</Message>
       </Box>
     );
   }
@@ -55,19 +69,13 @@ function LoginWithFace() {
   return (
     <Box title={title}>
       {isLoggedIn ? (
-        <div className="alert info">Log-in succeed</div>
+        <>
+          <Message type="info">Log in succeed</Message>
+          <Button onClick={getAccountInfo}>Get account information</Button>
+          <Button onClick={logout}>Log out</Button>
+        </>
       ) : (
-        <button onClick={() => login().then(() => setIsLoggedIn(true))}>
-          Login with Face wallet
-        </button>
-      )}
-      {isLoggedIn && (
-        <button onClick={() => getAccountInfo().then(setAccount)}>Get account information</button>
-      )}
-
-      {account.address && <div className="alert info">Address: {account.address}</div>}
-      {account.balance && (
-        <div className="alert info">Balance: {utils.formatEther(account.balance)}</div>
+        <Button onClick={login}>Log in with Face wallet</Button>
       )}
     </Box>
   );
