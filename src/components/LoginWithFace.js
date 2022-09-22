@@ -1,4 +1,4 @@
-import { providers, utils } from 'ethers';
+import { providers } from 'ethers';
 import { useEffect, useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 
@@ -10,7 +10,7 @@ import Message from './common/Message';
 const title = 'Log in';
 function LoginWithFace() {
   const face = useRecoilValue(faceAtom);
-  const [account, setAccount] = useRecoilState(accountAtom);
+  const [, setAccount] = useRecoilState(accountAtom);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
@@ -77,11 +77,6 @@ function LoginWithFace() {
             Log out
           </button>
         </>
-      )}
-
-      {account.address && <Message type="info">Address: {account.address}</Message>}
-      {account.balance && (
-        <Message type="info">Balance: {utils.formatEther(account.balance)}</Message>
       )}
     </Box>
   );

@@ -3,8 +3,15 @@
   padding: 60px;
 }
 
+.AccountInformation {
+  margin-top: 25px;
+}
+.AccountInformation .notification {
+  box-shadow: 0 0.5em 1em -0.125em rgb(10 10 10 / 10%), 0 0px 0 1px rgb(10 10 10 / 2%);
+}
+
 .wrapper {
-  margin-top: 60px;
+  margin-top: 35px;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
   text-align: center;
