@@ -61,16 +61,9 @@ function TransactionErc20() {
 
     const provider = new providers.Web3Provider(face.getEthLikeProvider(), 'any');
 
-    console.log(
-      'test',
-      makeErc20Data('transfer', receiverAddress, utils.parseUnits(amount)),
-      amount,
-      utils.parseUnits(amount)
-    );
-
     const signer = await provider.getSigner();
     const result = await signer.sendTransaction({
-      to: receiverAddress,
+      to: contractAddress,
       value: '0x0',
       data: makeErc20Data('transfer', receiverAddress, utils.parseUnits(amount)),
     });
