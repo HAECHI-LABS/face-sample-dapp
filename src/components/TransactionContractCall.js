@@ -1,5 +1,5 @@
 import { Network } from '@haechi-labs/face-sdk';
-import { providers } from 'ethers';
+import { providers, utils } from 'ethers';
 import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 
@@ -25,6 +25,7 @@ function TransactionContractCall() {
   const network = useRecoilValue(networkAtom);
   const [txHash, setTxHash] = useState('');
   const [contractAddress, setContractAddress] = useState('');
+  const [amount, setAmount] = useState('0');
   const [txData, setTxData] = useState('');
 
   useEffect(() => {
@@ -45,7 +46,7 @@ function TransactionContractCall() {
     const signer = await provider.getSigner();
     const result = await signer.sendTransaction({
       to: contractAddress,
-      value: '0x0',
+      value: utils.parseUnits(amount),
       data: txData,
     });
 
@@ -81,6 +82,9 @@ function TransactionContractCall() {
           onChange={(e) => setContractAddress(e.target.value)}
         />
       </Field>
+      <Field label="Amount">
+        <input className="input" value={amount} onChange={(e) => setAmount(e.target.value)} />
+      </Field>
       <Field label="Tx Data">
         <input className="input" value={txData} onChange={(e) => setTxData(e.target.value)} />
       </Field>
@@ -99,7 +103,7 @@ function TransactionContractCall() {
         </>
       )}
       <Message type="dark has-text-left	">
-        <h4 className="has-text-weight-bold	">Sample data for sample contract</h4>
+        <h4 className="has-text-weight-bold">Sample data for sample contract</h4>
         <div>
           For success: <span className="tag is-success is-light">0x0b93381b</span>
         </div>

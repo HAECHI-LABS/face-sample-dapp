@@ -30,7 +30,7 @@ function TransactionPlatformCoin() {
     const signer = await provider.getSigner();
     const result = await signer.sendTransaction({
       to: receiverAddress,
-      value: utils.parseEther(amount),
+      value: utils.parseUnits(amount),
     });
 
     setTxHash(result.hash);
