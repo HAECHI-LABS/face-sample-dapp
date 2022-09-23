@@ -1,9 +1,10 @@
 import { Network } from '@haechi-labs/face-sdk';
-import { providers, utils } from 'ethers';
+import { ethers, providers, utils } from 'ethers';
 import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 
-import { makeErc20Data } from '../lib/utils';
+import { ERC20_ABI } from '../lib/abi';
+import { getExplorerUrl, makeErc20Data } from '../lib/utils';
 import { faceAtom } from '../store';
 import { accountAtom } from '../store/accountAtom';
 import { networkAtom } from '../store/networkAtom';
@@ -28,6 +29,7 @@ function TransactionErc20() {
   const [amount, setAmount] = useState('0.001');
   const [contractAddress, setContractAddress] = useState('');
   const [receiverAddress, setReceiverAddress] = useState('');
+  const [balance, setBalance] = useState('');
 
   useEffect(() => {
     // Set receiver to user account
@@ -61,7 +63,7 @@ function TransactionErc20() {
 
     const signer = await provider.getSigner();
     const result = await signer.sendTransaction({
-      to: receiverAddress,
+      to: contractAddress,
       value: '0x0',
       data: makeErc20Data('transfer', receiverAddress, utils.parseUnits(amount)),
     });
@@ -74,6 +76,19 @@ function TransactionErc20() {
     console.groupEnd();
   }
 
+  async function getBalance() {
+    if (!contractAddress) {
+      alert('Please enter contract address');
+      return;
+    }
+
+    const provider = new providers.Web3Provider(face.getEthLikeProvider(), 'any');
+    const contract = new ethers.Contract(contractAddress, ERC20_ABI, provider);
+    const balance = await contract.balanceOf(account.address);
+
+    setBalance(utils.formatUnits(balance));
+  }
+
   if (!face) {
     return (
       <Box title={title}>
@@ -81,7 +96,7 @@ function TransactionErc20() {
       </Box>
     );
   }
-  if (!account.balance || !account.address) {
+  if (!account.address) {
     return (
       <Box title={title}>
         <Message type="danger">You must log in and get account first.</Message>
@@ -108,16 +123,22 @@ function TransactionErc20() {
           onChange={(e) => setReceiverAddress(e.target.value)}
         />
       </Field>
+      <Button onClick={getBalance}>Get ERC20 token balance</Button>
+      {balance && (
+        <Message type="info" className="has-text-left">
+          Balance: {balance}
+        </Message>
+      )}
       <Button onClick={sendTransaction}>Transfer {amount} ERC20 token</Button>
       {txHash && (
         <>
           <Message type="info">Hash: {txHash}</Message>
           <Message type="info">
             <a
-              href={`https://ropsten.etherscan.io/tx/${txHash}`}
+              href={`${getExplorerUrl(network)}${txHash}`}
               rel="noopener noreferrer"
               target="_blank">
-              Ropsten Link
+              Explorer Link
             </a>
           </Message>
         </>
