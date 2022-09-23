@@ -3,7 +3,7 @@ import { BigNumber, providers } from 'ethers';
 import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 
-import { makeErc721Data } from '../lib/utils';
+import { getExplorerUrl, makeErc721Data } from '../lib/utils';
 import { faceAtom } from '../store';
 import { accountAtom } from '../store/accountAtom';
 import { networkAtom } from '../store/networkAtom';
@@ -115,10 +115,10 @@ function TransactionErc721() {
           <Message type="info">Hash: {txHash}</Message>
           <Message type="info">
             <a
-              href={`https://ropsten.etherscan.io/tx/${txHash}`}
+              href={`${getExplorerUrl(network)}${txHash}`}
               rel="noopener noreferrer"
               target="_blank">
-              Ropsten Link
+              Explorer Link
             </a>
           </Message>
         </>

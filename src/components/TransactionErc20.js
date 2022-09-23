@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 
 import { ERC20_ABI } from '../lib/abi';
-import { makeErc20Data } from '../lib/utils';
+import { getExplorerUrl, makeErc20Data } from '../lib/utils';
 import { faceAtom } from '../store';
 import { accountAtom } from '../store/accountAtom';
 import { networkAtom } from '../store/networkAtom';
@@ -60,6 +60,13 @@ function TransactionErc20() {
     }
 
     const provider = new providers.Web3Provider(face.getEthLikeProvider(), 'any');
+
+    console.log(
+      'test',
+      makeErc20Data('transfer', receiverAddress, utils.parseUnits(amount)),
+      amount,
+      utils.parseUnits(amount)
+    );
 
     const signer = await provider.getSigner();
     const result = await signer.sendTransaction({
@@ -135,10 +142,10 @@ function TransactionErc20() {
           <Message type="info">Hash: {txHash}</Message>
           <Message type="info">
             <a
-              href={`https://ropsten.etherscan.io/tx/${txHash}`}
+              href={`${getExplorerUrl(network)}${txHash}`}
               rel="noopener noreferrer"
               target="_blank">
-              Ropsten Link
+              Explorer Link
             </a>
           </Message>
         </>

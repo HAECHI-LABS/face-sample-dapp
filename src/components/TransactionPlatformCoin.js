@@ -2,8 +2,10 @@ import { providers, utils } from 'ethers';
 import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 
+import { getExplorerUrl } from '../lib/utils';
 import { faceAtom } from '../store';
 import { accountAtom } from '../store/accountAtom';
+import { networkAtom } from '../store/networkAtom';
 import Box from './common/Box';
 import Button from './common/Button';
 import Field from './common/Field';
@@ -13,6 +15,7 @@ const title = 'Platform Coin Transaction';
 function TransactionPlatformCoin() {
   const face = useRecoilValue(faceAtom);
   const account = useRecoilValue(accountAtom);
+  const network = useRecoilValue(networkAtom);
   const [txHash, setTxHash] = useState('');
   const [amount, setAmount] = useState('0.001');
   const [receiverAddress, setReceiverAddress] = useState('');
@@ -74,10 +77,10 @@ function TransactionPlatformCoin() {
           <Message type="info">Hash: {txHash}</Message>
           <Message type="info">
             <a
-              href={`https://ropsten.etherscan.io/tx/${txHash}`}
+              href={`${getExplorerUrl(network)}${txHash}`}
               rel="noopener noreferrer"
               target="_blank">
-              Ropsten Link
+              Explorer Link
             </a>
           </Message>
         </>

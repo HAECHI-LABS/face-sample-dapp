@@ -3,6 +3,7 @@ import { providers, utils } from 'ethers';
 import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 
+import { getExplorerUrl } from '../lib/utils';
 import { faceAtom } from '../store';
 import { accountAtom } from '../store/accountAtom';
 import { networkAtom } from '../store/networkAtom';
@@ -94,10 +95,10 @@ function TransactionContractCall() {
           <Message type="info">Hash: {txHash}</Message>
           <Message type="info">
             <a
-              href={`https://ropsten.etherscan.io/tx/${txHash}`}
+              href={`${getExplorerUrl(network)}${txHash}`}
               rel="noopener noreferrer"
               target="_blank">
-              Ropsten Link
+              Explorer Link
             </a>
           </Message>
         </>
