@@ -102,7 +102,7 @@ function TransactionContractCall() {
           </Message>
         </>
       )}
-      <Message type="dark has-text-left	">
+      <Message type="dark" className="has-text-left">
         <h4 className="has-text-weight-bold">Sample data for sample contract</h4>
         <div>
           For success: <span className="tag is-success is-light">0x0b93381b</span>
