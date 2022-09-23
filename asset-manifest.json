@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/face-sample-dapp/static/css/main.540ffd51.css",
-    "main.js": "/face-sample-dapp/static/js/main.3ebd087e.js",
-    "static/media/logo-solid.svg": "/face-sample-dapp/static/media/logo-solid.cf9e9762ea56173439380d21e95be36a.svg",
+    "main.js": "/face-sample-dapp/static/js/main.1011a230.js",
+    "static/media/logo.svg": "/face-sample-dapp/static/media/logo.7a23ae45110dc7397f2d9370a6d70925.svg",
     "index.html": "/face-sample-dapp/index.html",
     "main.540ffd51.css.map": "/face-sample-dapp/static/css/main.540ffd51.css.map",
-    "main.3ebd087e.js.map": "/face-sample-dapp/static/js/main.3ebd087e.js.map"
+    "main.1011a230.js.map": "/face-sample-dapp/static/js/main.1011a230.js.map"
   },
   "entrypoints": [
     "static/css/main.540ffd51.css",
-    "static/js/main.3ebd087e.js"
+    "static/js/main.1011a230.js"
   ]
 }
