@@ -1,6 +1,6 @@
 import './App.css';
 
-import { ReactComponent as Logo } from './assets/logo-solid.svg';
+import { ReactComponent as Logo } from './assets/logo.svg';
 import AccountInformation from './components/AccountInformation';
 import ConnectNetwork from './components/ConnectNetwork';
 import LoginWithFace from './components/LoginWithFace';
