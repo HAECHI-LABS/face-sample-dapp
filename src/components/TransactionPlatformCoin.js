@@ -31,16 +31,19 @@ function TransactionPlatformCoin() {
     const provider = new providers.Web3Provider(face.getEthLikeProvider(), 'any');
 
     const signer = await provider.getSigner();
-    const result = await signer.sendTransaction({
+    const transactionResponse = await signer.sendTransaction({
       to: receiverAddress,
       value: utils.parseUnits(amount),
     });
 
-    setTxHash(result.hash);
+    setTxHash(transactionResponse.hash);
 
     console.group('[Transaction Information]');
-    console.log('Transaction info:', result);
-    console.log('Ropsten Link:', `https://ropsten.etherscan.io/tx/${result.hash}`);
+    console.log('Transaction response:', transactionResponse);
+    console.log('Ropsten Link:', `${getExplorerUrl(network)}${transactionResponse.hash}`);
+
+    const receipt = await transactionResponse.wait();
+    console.log('Transaction receipt', receipt);
     console.groupEnd();
   }
 

@@ -61,17 +61,20 @@ function TransactionErc721() {
 
     const signer = await provider.getSigner();
     const myAddress = await signer.getAddress();
-    const result = await signer.sendTransaction({
+    const transactionResponse = await signer.sendTransaction({
       to: receiverAddress,
       value: '0x0',
       data: makeErc721Data('transferFrom', myAddress, receiverAddress, BigNumber.from(tokenId)),
     });
 
-    setTxHash(result.hash);
+    setTxHash(transactionResponse.hash);
 
     console.group('[Transaction Information]');
-    console.log('Transaction info:', result);
-    console.log('Ropsten Link:', `https://ropsten.etherscan.io/tx/${result.hash}`);
+    console.log('Transaction response:', transactionResponse);
+    console.log('Ropsten Link:', `${getExplorerUrl(network)}${transactionResponse.hash}`);
+
+    const receipt = await transactionResponse.wait();
+    console.log('Transaction receipt', receipt);
     console.groupEnd();
   }
 
