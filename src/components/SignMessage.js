@@ -16,14 +16,12 @@ function SignMessage() {
   const [message, setMessage] = useState('');
   const [signedMessage, setSignedMessage] = useState('');
 
-  async function signMessage(isEthSign = false) {
+  async function signMessage() {
     const provider = new providers.Web3Provider(face.getEthLikeProvider(), 'any');
-    let response;
-    if (isEthSign) {
-      response = await provider.getSigner()._legacySignMessage(message);
-    } else {
-      response = await provider.getSigner().signMessage(message);
-    }
+
+    const signer = await provider.getSigner();
+    const response = await signer.signMessage(message);
+
     console.log('Signed message', response);
     setSignedMessage(response);
   }
