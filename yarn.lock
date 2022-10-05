@@ -1523,17 +1523,17 @@
     "@ethersproject/properties" "^5.6.0"
     "@ethersproject/strings" "^5.6.1"
 
-"@haechi-labs/face-sdk@^1.1.0-alpha.0":
-  version "1.1.0-alpha.0"
-  resolved "https://registry.yarnpkg.com/@haechi-labs/face-sdk/-/face-sdk-1.1.0-alpha.0.tgz#36b313b82e4ed1b7de0e5b89b6b9ede4b1246f7b"
-  integrity sha512-lPU3UG3MWsMKdH9M1ETGwzdBkP3Yhf/HlbajizX+C+7V07ix54a543lAxaOQ7GEWZX8rqEUattF7kk5d+9T74A==
+"@haechi-labs/face-sdk@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@haechi-labs/face-sdk/-/face-sdk-1.1.0.tgz#ede7b3d27e3ad4068d9a39e3413af69b45e992e7"
+  integrity sha512-SVnOmWADwJ02SrUvK0TFX7jJZ+TCdgC57ErJEu50Dcb1sUXVsrj9oA41PjGTCKLsF7421ZaXQHEszmE2W2uKMw==
   dependencies:
     ethers "^5.6.8"
 
-"@haechi-labs/face-types@^1.1.0-alpha.0":
-  version "1.1.0-alpha.0"
-  resolved "https://registry.yarnpkg.com/@haechi-labs/face-types/-/face-types-1.1.0-alpha.0.tgz#986842933a5529fbb6f0c8a8aca33c25a3a290ff"
-  integrity sha512-UGnJp6CMPYVkKbwuzA3850k4X6W5TaIIHMT0Tx2Rbaxv251imIQC6c514YQWuIfjwqYDekSAU9NIdpsiZijt+Q==
+"@haechi-labs/face-types@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@haechi-labs/face-types/-/face-types-1.1.0.tgz#4f0abe6234cf56d51d68abb820518fa09f88de11"
+  integrity sha512-E1urkjX/QkUCDcdyuNhz2EiFikukLyGLHIG6jpoQSmd5C4cHV2JmwVsutMsJKdU/WBD5/WPFRLo0mc2OVt/wog==
   dependencies:
     ethers "^5.6.8"
 
