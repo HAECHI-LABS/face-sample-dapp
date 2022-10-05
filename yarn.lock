@@ -1523,17 +1523,17 @@
     "@ethersproject/properties" "^5.6.0"
     "@ethersproject/strings" "^5.6.1"
 
-"@haechi-labs/face-sdk@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.npmjs.org/@haechi-labs/face-sdk/-/face-sdk-1.0.0.tgz"
-  integrity sha512-qCBq7E2GP6JCZnlFuBKh4F2oUz5yFsePFYi+7nySodMye6l35FpZXDZbjlpEEL+vFiHe8CRBr34Q0evhNumwtA==
+"@haechi-labs/face-sdk@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@haechi-labs/face-sdk/-/face-sdk-1.1.0.tgz#ede7b3d27e3ad4068d9a39e3413af69b45e992e7"
+  integrity sha512-SVnOmWADwJ02SrUvK0TFX7jJZ+TCdgC57ErJEu50Dcb1sUXVsrj9oA41PjGTCKLsF7421ZaXQHEszmE2W2uKMw==
   dependencies:
     ethers "^5.6.8"
 
-"@haechi-labs/face-types@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.npmjs.org/@haechi-labs/face-types/-/face-types-1.0.0.tgz"
-  integrity sha512-60dnoet7AIc7870iPXau4CRjtIrgn99LHCJNAML27aCR1iVA4a4ROJEWNSZDfPCjbZ9RVFFqZVKuiaOJ0Yu14g==
+"@haechi-labs/face-types@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@haechi-labs/face-types/-/face-types-1.1.0.tgz#4f0abe6234cf56d51d68abb820518fa09f88de11"
+  integrity sha512-E1urkjX/QkUCDcdyuNhz2EiFikukLyGLHIG6jpoQSmd5C4cHV2JmwVsutMsJKdU/WBD5/WPFRLo0mc2OVt/wog==
   dependencies:
     ethers "^5.6.8"
 

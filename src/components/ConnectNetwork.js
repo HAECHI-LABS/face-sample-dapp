@@ -33,18 +33,18 @@ function ConnectNetwork() {
 
   return (
     <Box title={title}>
-      <Button onClick={() => connectTo(Network.ETH_TESTNET)}>
-        Connect to Ether Testnet
+      <Button onClick={() => connectTo(Network.ETH_TESTNET)}>Connect to Ether Testnet</Button>
+      <Button onClick={() => connectTo(Network.ETH_MAINNET)}>Connect to Ether Mainnet</Button>
+      <Button onClick={() => connectTo(Network.MATIC_TESTNET)}>Connect to Polygon Testnet</Button>
+      <Button onClick={() => connectTo(Network.MATIC_MAINNET)}>Connect to Polygon Mainnet</Button>
+      <Button onClick={() => connectTo(Network.BINANCE_COIN_TESTNET)}>
+        Connect to BNB Smart Chain Testnet
       </Button>
-      <Button onClick={() => connectTo(Network.ETH_MAINNET)}>
-        Connect to Ether Mainnet
+      <Button onClick={() => connectTo(Network.BINANCE_COIN_MAINNET)}>
+        Connect to BNB Smart Chain Mainnet
       </Button>
-      <Button onClick={() => connectTo(Network.MATIC_TESTNET)}>
-        Connect to Polygon Testnet
-      </Button>
-      <Button onClick={() => connectTo(Network.MATIC_MAINNET)}>
-        Connect to Polygon Mainnet
-      </Button>
+      <Button onClick={() => connectTo(Network.KLAYTN_TESTNET)}>Connect to Klaytn Testnet</Button>
+      <Button onClick={() => connectTo(Network.KLAYTN_MAINNET)}>Connect to Klaytn Mainnet</Button>
     </Box>
   );
 }
