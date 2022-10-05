@@ -17,6 +17,10 @@ const contractAddressMap = {
   [Network.ETH_TESTNET]: '0xAE5c1CF9C362CFD6B5F94e00Eacb8D406429B35a',
   [Network.MATIC_MAINNET]: '',
   [Network.MATIC_TESTNET]: '0xe63c2f4bdd0df2b18b0a4e0210d4b1e95a23dff9',
+  [Network.BINANCE_COIN_MAINNET]: '',
+  [Network.BINANCE_COIN_TESTNET]: '0x33d24CdD4a858BC2965568717C7D11eC38650c56',
+  [Network.KLAYTN_MAINNET]: '',
+  [Network.KLAYTN_TESTNET]: '0xfe72540387e1F9aeFAC07D230dAE1865ad2E733c',
 };
 
 const title = 'Contract Call Transaction';

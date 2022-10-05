@@ -18,6 +18,10 @@ const erc20ContractAddressMap = {
   [Network.ETH_TESTNET]: '0x6558820324875d2747a32B7D37496fd473AD7648',
   [Network.MATIC_MAINNET]: '0xfce04dd232006d0da001f6d54bb5a7fc969dbc08',
   [Network.MATIC_TESTNET]: '0xfce04dd232006d0da001f6d54bb5a7fc969dbc08',
+  [Network.BINANCE_COIN_MAINNET]: '0xab3e0c68e867f1c81a6660960fdfcf53402b33bf',
+  [Network.BINANCE_COIN_TESTNET]: '0x4c253d0f5de4dac61c5355aaa3efe0872dfadfff',
+  [Network.KLAYTN_MAINNET]: '0xab3e0c68e867f1c81a6660960fdfcf53402b33bf',
+  [Network.KLAYTN_TESTNET]: '0xb5567463c35dE682072A669425d6776B178Be3E4',
 };
 
 const title = 'ERC20 Transaction';
@@ -126,12 +130,6 @@ function TransactionErc20() {
           onChange={(e) => setReceiverAddress(e.target.value)}
         />
       </Field>
-      <Button onClick={getBalance}>Get ERC20 token balance</Button>
-      {balance && (
-        <Message type="info" className="has-text-left">
-          Balance: {balance}
-        </Message>
-      )}
       <Button onClick={sendTransaction}>Transfer {amount} ERC20 token</Button>
       {txHash && (
         <>
@@ -145,6 +143,12 @@ function TransactionErc20() {
             </a>
           </Message>
         </>
+      )}
+      <Button onClick={getBalance}>Get ERC20 token balance</Button>
+      {balance && (
+        <Message type="info" className="has-text-left">
+          Balance: {balance}
+        </Message>
       )}
     </Box>
   );
