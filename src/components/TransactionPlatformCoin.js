@@ -11,7 +11,7 @@ import Button from './common/Button';
 import Field from './common/Field';
 import Message from './common/Message';
 
-const title = 'Platform Coin Transaction';
+const title = 'Coin Transaction';
 function TransactionPlatformCoin() {
   const face = useRecoilValue(faceAtom);
   const account = useRecoilValue(accountAtom);
@@ -40,7 +40,7 @@ function TransactionPlatformCoin() {
 
     console.group('[Transaction Information]');
     console.log('Transaction response:', transactionResponse);
-    console.log('Ropsten Link:', `${getExplorerUrl(network)}${transactionResponse.hash}`);
+    console.log('Explorer Link:', `${getExplorerUrl(network)}${transactionResponse.hash}`);
 
     const receipt = await transactionResponse.wait();
     console.log('Transaction receipt', receipt);
