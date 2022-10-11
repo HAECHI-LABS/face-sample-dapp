@@ -23,7 +23,7 @@ const erc721ContractAddressMap = {
   [Network.KLAYTN_TESTNET]: '0x7059f425113f6630bd3871d778f0c289939a0da8',
 };
 
-const title = 'ERC721 Transaction';
+const title = 'Non-Fungible Token Transaction';
 function TransactionErc721() {
   const face = useRecoilValue(faceAtom);
   const account = useRecoilValue(accountAtom);
@@ -75,7 +75,7 @@ function TransactionErc721() {
 
     console.group('[Transaction Information]');
     console.log('Transaction response:', transactionResponse);
-    console.log('Ropsten Link:', `${getExplorerUrl(network)}${transactionResponse.hash}`);
+    console.log('Explorer Link:', `${getExplorerUrl(network)}${transactionResponse.hash}`);
 
     const receipt = await transactionResponse.wait();
     console.log('Transaction receipt', receipt);

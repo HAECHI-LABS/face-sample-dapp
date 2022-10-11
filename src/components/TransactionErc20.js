@@ -24,7 +24,7 @@ const erc20ContractAddressMap = {
   [Network.KLAYTN_TESTNET]: '0xb5567463c35dE682072A669425d6776B178Be3E4',
 };
 
-const title = 'ERC20 Transaction';
+const title = 'Fungible Token Transaction';
 function TransactionErc20() {
   const face = useRecoilValue(faceAtom);
   const account = useRecoilValue(accountAtom);
@@ -76,7 +76,7 @@ function TransactionErc20() {
 
     console.group('[Transaction Information]');
     console.log('Transaction response:', transactionResponse);
-    console.log('Ropsten Link:', `${getExplorerUrl(network)}${transactionResponse.hash}`);
+    console.log('Explorer Link:', `${getExplorerUrl(network)}${transactionResponse.hash}`);
 
     const receipt = await transactionResponse.wait();
     console.log('Transaction receipt', receipt);
