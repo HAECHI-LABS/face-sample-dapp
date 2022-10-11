@@ -19,6 +19,10 @@ export function getExplorerUrl(network) {
     [Network.ETH_MAINNET]: 'https://etherscan.io/tx/',
     [Network.MATIC_TESTNET]: 'https://mumbai.polygonscan.com/tx/',
     [Network.MATIC_MAINNET]: 'https://polygonscan.com/tx/',
+    [Network.BINANCE_COIN_MAINNET]: 'https://bscscan.com/tx/',
+    [Network.BINANCE_COIN_TESTNET]: 'https://testnet.bscscan.com/tx/',
+    [Network.KLAYTN_MAINNET]: 'https://www.klaytnfinder.io/tx/',
+    [Network.KLAYTN_TESTNET]: 'https://baobab.klaytnfinder.io/tx/',
   };
 
   return explorerMap[network];
