@@ -21,8 +21,8 @@ export function getExplorerUrl(network) {
     [Network.MATIC_MAINNET]: 'https://polygonscan.com/tx/',
     [Network.BINANCE_COIN_MAINNET]: 'https://bscscan.com/tx/',
     [Network.BINANCE_COIN_TESTNET]: 'https://testnet.bscscan.com/tx/',
-    [Network.KLAYTN_MAINNET]: 'https://scope.klaytn.com/tx/',
-    [Network.KLAYTN_TESTNET]: 'https://baobab.scope.klaytn.com/tx/',
+    [Network.KLAYTN_MAINNET]: 'https://www.klaytnfinder.io/tx/',
+    [Network.KLAYTN_TESTNET]: 'https://baobab.klaytnfinder.io/tx/',
   };
 
   return explorerMap[network];
