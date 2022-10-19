@@ -21,6 +21,8 @@ const contractAddressMap = {
   [Network.BINANCE_COIN_TESTNET]: '0x33d24CdD4a858BC2965568717C7D11eC38650c56',
   [Network.KLAYTN_MAINNET]: '',
   [Network.KLAYTN_TESTNET]: '0xfe72540387e1F9aeFAC07D230dAE1865ad2E733c',
+  [Network.BORA]: 'TODO',
+  [Network.BORA_TESTNET]: 'TODO',
 };
 
 const title = 'Contract Call Transaction';
