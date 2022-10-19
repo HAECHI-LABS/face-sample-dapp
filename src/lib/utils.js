@@ -23,8 +23,8 @@ export function getExplorerUrl(network) {
     [Network.BNB_SMART_CHAIN]: 'https://bscscan.com/tx/',
     [Network.BAOBAB]: 'https://baobab.klaytnfinder.io/tx/',
     [Network.KLAYTN]: 'https://www.klaytnfinder.io/tx/',
-    [Network.BORA]: 'https://scope.boraportal.com/',
-    [Network.BORA_TESTNET]: 'https://scope.boraportal.com/',
+    [Network.BORA]: 'https://scope.boraportal.com/tx/',
+    [Network.BORA_TESTNET]: 'https://scope.boraportal.com/tx/',
   };
 
   return explorerMap[network];
