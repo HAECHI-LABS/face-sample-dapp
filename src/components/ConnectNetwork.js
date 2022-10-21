@@ -8,6 +8,17 @@ import Box from './common/Box';
 import Button from './common/Button';
 import Message from './common/Message';
 
+const networkList = [
+  Network.ETHEREUM,
+  Network.GOERLI,
+  Network.POLYGON,
+  Network.MUMBAI,
+  Network.BNB_SMART_CHAIN,
+  Network.BNB_SMART_CHAIN_TESTNET,
+  Network.KLAYTN,
+  Network.BAOBAB,
+];
+
 const title = 'Connect Network';
 function ConnectNetwork() {
   const [face, setFace] = useRecoilState(faceAtom);
@@ -33,18 +44,11 @@ function ConnectNetwork() {
 
   return (
     <Box title={title}>
-      <Button onClick={() => connectTo(Network.ETH_TESTNET)}>Connect to Ether Testnet</Button>
-      <Button onClick={() => connectTo(Network.ETH_MAINNET)}>Connect to Ether Mainnet</Button>
-      <Button onClick={() => connectTo(Network.MATIC_TESTNET)}>Connect to Polygon Testnet</Button>
-      <Button onClick={() => connectTo(Network.MATIC_MAINNET)}>Connect to Polygon Mainnet</Button>
-      <Button onClick={() => connectTo(Network.BINANCE_COIN_TESTNET)}>
-        Connect to BNB Smart Chain Testnet
-      </Button>
-      <Button onClick={() => connectTo(Network.BINANCE_COIN_MAINNET)}>
-        Connect to BNB Smart Chain Mainnet
-      </Button>
-      <Button onClick={() => connectTo(Network.KLAYTN_TESTNET)}>Connect to Klaytn Testnet</Button>
-      <Button onClick={() => connectTo(Network.KLAYTN_MAINNET)}>Connect to Klaytn Mainnet</Button>
+      {networkList.map((network) => (
+        <Button key={network} onClick={() => connectTo(network)}>
+          Connect to {network}
+        </Button>
+      ))}
     </Box>
   );
 }

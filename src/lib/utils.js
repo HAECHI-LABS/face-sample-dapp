@@ -15,14 +15,14 @@ export function makeErc721Data(functionFragment, from, to, tokenId) {
 
 export function getExplorerUrl(network) {
   const explorerMap = {
-    [Network.ETH_TESTNET]: 'https://ropsten.etherscan.io/tx/',
-    [Network.ETH_MAINNET]: 'https://etherscan.io/tx/',
-    [Network.MATIC_TESTNET]: 'https://mumbai.polygonscan.com/tx/',
-    [Network.MATIC_MAINNET]: 'https://polygonscan.com/tx/',
-    [Network.BINANCE_COIN_MAINNET]: 'https://bscscan.com/tx/',
-    [Network.BINANCE_COIN_TESTNET]: 'https://testnet.bscscan.com/tx/',
-    [Network.KLAYTN_MAINNET]: 'https://www.klaytnfinder.io/tx/',
-    [Network.KLAYTN_TESTNET]: 'https://baobab.klaytnfinder.io/tx/',
+    [Network.GOERLI]: 'https://goerli.etherscan.io/tx/',
+    [Network.ETHEREUM]: 'https://etherscan.io/tx/',
+    [Network.MUMBAI]: 'https://mumbai.polygonscan.com/tx/',
+    [Network.POLYGON]: 'https://polygonscan.com/tx/',
+    [Network.BNB_SMART_CHAIN_TESTNET]: 'https://testnet.bscscan.com/tx/',
+    [Network.BNB_SMART_CHAIN]: 'https://bscscan.com/tx/',
+    [Network.BAOBAB]: 'https://baobab.klaytnfinder.io/tx/',
+    [Network.KLAYTN]: 'https://www.klaytnfinder.io/tx/',
   };
 
   return explorerMap[network];
