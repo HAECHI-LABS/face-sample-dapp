@@ -143,6 +143,11 @@ svg.logo {
 }
 
 @media screen and (max-width: 768px) {
+  .App {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
   .mobile {
     display: initial;
   }
