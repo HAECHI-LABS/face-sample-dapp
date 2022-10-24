@@ -16,19 +16,22 @@ function GNB() {
       </div>
       <ul className="menus">
         <li>
-          <a href="#" target="_blank">
+          <a href="https://docs.facewallet.xyz/docs/overview" target="_blank" rel="noreferrer">
             <ExternalIcon />
             Docs
           </a>
         </li>
         <li>
-          <a href="#" target="_blank">
+          <a
+            href="https://www.figma.com/file/EFdYprD8iEP6bEKtkBbUIM/Face-Wallet-User-Flow?node-id=0%3A1"
+            target="_blank"
+            rel="noreferrer">
             <ExternalIcon />
             User Flow
           </a>
         </li>
         <li>
-          <a href="#" target="_blank">
+          <a href="https://haechi.typeform.com/to/RQd6k1Y6" target="_blank" rel="noreferrer">
             <ExternalIcon />
             Integrate for FREE
           </a>
