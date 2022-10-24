@@ -152,6 +152,17 @@ svg.logo {
     display: initial;
   }
 
+  .wrapper {
+    margin-top: 24px;
+  }
+
+  nav.gnb {
+    flex-direction: column;
+    min-height: var(--gnb-height);
+    height: initial;
+    padding: 0 24px;
+  }
+
   nav.gnb > .logo-wrapper {
     padding-top: 16px;
     padding-bottom: 16px;
@@ -159,12 +170,6 @@ svg.logo {
     display: flex;
     justify-content: space-between;
     align-items: center;
-  }
-
-  nav.gnb {
-    flex-direction: column;
-    height: initial;
-    padding: 0 24px;
   }
 
   nav.gnb:has(.menu-toggle input#toggle:not(:checked)) > ul.menus {
