@@ -1,3 +1,7 @@
+:root {
+  --gnb-height: 60px;
+}
+
 .App {
   text-align: center;
   padding: 60px;
@@ -11,7 +15,7 @@
 }
 
 .wrapper {
-  margin-top: 35px;
+  margin-top: 56px;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
   text-align: center;
@@ -53,4 +57,141 @@
 .field.is-horizontal .field-label .label {
   font-weight: 500;
   color: #4a4a4a;
+}
+
+nav.gnb {
+  display: flex;
+  background: white;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--gnb-height);
+  padding: 0 60px;
+  z-index: 10000;
+  border-bottom: 1px solid #dce1e8;
+}
+
+nav.gnb > .logo-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav.gnb > ul.menus {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+}
+
+nav.gnb > ul.menus > li {
+  display: inline-block;
+}
+
+nav.gnb > ul.menus > li + li {
+  margin-left: 8px;
+}
+
+nav.gnb > ul.menus > li > a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 12px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16px;
+  color: #288efb;
+  border: 1px solid #b4dafd;
+  border-radius: 18px;
+}
+
+nav.gnb > ul > li > a > svg {
+  margin-right: 4px;
+}
+
+svg.logo {
+  width: auto;
+  height: 20px;
+}
+
+.menu-toggle {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+}
+
+.menu-toggle > input[type='checkbox'] {
+  display: none;
+}
+
+.menu-toggle:has(input[type='checkbox']:checked) > .menu-icon {
+  display: none;
+}
+
+.menu-toggle:has(input[type='checkbox']:not(:checked)) > .close-icon {
+  display: none;
+}
+
+.mobile {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .App {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .mobile {
+    display: initial;
+  }
+
+  .wrapper {
+    margin-top: 24px;
+  }
+
+  nav.gnb {
+    flex-direction: column;
+    min-height: var(--gnb-height);
+    height: initial;
+    padding: 0 24px;
+  }
+
+  nav.gnb > .logo-wrapper {
+    padding-top: 16px;
+    padding-bottom: 16px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  nav.gnb:has(.menu-toggle input#toggle:not(:checked)) > ul.menus {
+    display: none;
+  }
+
+  nav.gnb > ul.menus {
+    width: 100%;
+    flex-direction: column;
+    padding-bottom: 16px;
+  }
+
+  nav.gnb > ul.menus > li {
+    width: 100%;
+    display: flex;
+  }
+
+  nav.gnb > ul.menus > li > a {
+    width: 100%;
+  }
+
+  ul.menus > li + li {
+    margin-top: 8px;
+  }
 }
