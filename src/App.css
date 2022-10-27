@@ -99,13 +99,34 @@ nav.gnb > ul.menus > li > a {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 10px 12px;
+  padding: 8px 12px;
   font-size: 14px;
   font-weight: 500;
   line-height: 16px;
+  fill: #288efb;
   color: #288efb;
   border: 1px solid #b4dafd;
   border-radius: 18px;
+  transition: 0.3s;
+}
+
+nav.gnb > ul.menus > li > a > svg {
+  fill: #288efb;
+  transition: 0.3s;
+}
+
+nav.gnb > ul.menus > li > a:hover {
+  background: #ebf6ff;
+}
+
+nav.gnb > ul.menus > li > a:active {
+  border-color: #b4dafd;
+  color: #b4dafd;
+  background: #ebf6ff;
+}
+
+nav.gnb > ul.menus > li > a:active > svg {
+  fill: #b4dafd;
 }
 
 nav.gnb > ul > li > a > svg {
