@@ -21,6 +21,8 @@ const erc721ContractAddressMap = {
   [Network.BINANCE_COIN_TESTNET]: '0x2d65997da649f79ff79ac49501d786cc4973a715',
   [Network.KLAYTN_MAINNET]: '0xa2fab648f2cfd5cea88492808214fce0cca15b5e',
   [Network.KLAYTN_TESTNET]: '0x7059f425113f6630bd3871d778f0c289939a0da8',
+  [Network.BORA]: '0x646ea0705805AE57C3500d6EC46BF982Fa88ed83',
+  [Network.BORA_TESTNET]: '0x0F2585C209Fc272ad29b9c945766A0F7C45db7a0',
 };
 
 const title = 'Non-Fungible Token Transaction';

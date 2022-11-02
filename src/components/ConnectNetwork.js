@@ -17,6 +17,8 @@ const networkList = [
   Network.BNB_SMART_CHAIN_TESTNET,
   Network.KLAYTN,
   Network.BAOBAB,
+  Network.BORA,
+  Network.BORA_TESTNET,
 ];
 
 const title = 'Connect Network';
