@@ -1,9 +1,9 @@
-import { Face, Network } from '@haechi-labs/face-sdk';
-import { useRecoilState } from 'recoil';
+import {Face, Network} from '@haechi-labs/face-sdk';
+import {useRecoilState} from 'recoil';
 
-import { API_KEY } from '../config/apiKey';
-import { faceAtom } from '../store';
-import { networkAtom } from '../store/networkAtom';
+import {resolveApiKey} from '../config/apiKey';
+import {faceAtom} from '../store';
+import {networkAtom} from '../store/networkAtom';
 import Box from './common/Box';
 import Button from './common/Button';
 import Message from './common/Message';
@@ -22,6 +22,7 @@ const networkList = [
 ];
 
 const title = 'Connect Network';
+
 function ConnectNetwork() {
   const [face, setFace] = useRecoilState(faceAtom);
   const [, setNetwork] = useRecoilState(networkAtom);
@@ -29,8 +30,9 @@ function ConnectNetwork() {
   const connectTo = (network) => {
     setNetwork(network);
 
+    console.log(network);
     const face = new Face({
-      apiKey: API_KEY,
+      apiKey: resolveApiKey(network),
       network: network,
     });
     setFace(face);
@@ -44,11 +46,38 @@ function ConnectNetwork() {
     );
   }
 
+  const resolveNetworkName = (network) => {
+    switch (network) {
+      case Network.ETHEREUM:
+        return "Ethereum";
+      case Network.GOERLI:
+        return 'Goerli';
+      case Network.POLYGON:
+        return "Polygon";
+      case Network.MUMBAI:
+        return 'Mumbai';
+      case Network.BNB_SMART_CHAIN:
+        return "BNB Smart Chain";
+      case Network.BNB_SMART_CHAIN_TESTNET:
+        return 'BNB Smart Chain Testnet';
+      case Network.KLAYTN:
+        return "Klaytn";
+      case Network.BAOBAB:
+        return 'Baobab';
+      case Network.BORA:
+        return "Bora";
+      case Network.BORA_TESTNET:
+        return 'Bora Testnet';
+      default:
+        throw new Error("unsupported network error");
+    }
+  }
+
   return (
     <Box title={title}>
       {networkList.map((network) => (
         <Button key={network} onClick={() => connectTo(network)}>
-          Connect to {network}
+          Connect to {resolveNetworkName(network)}
         </Button>
       ))}
     </Box>
