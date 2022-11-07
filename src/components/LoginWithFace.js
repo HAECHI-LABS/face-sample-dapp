@@ -14,19 +14,6 @@ function LoginWithFace() {
   const [, setAccount] = useRecoilState(accountAtom);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  async function login() {
-    const res = await face.auth.login();
-    console.log('Login response:', res);
-
-    setIsLoggedIn(true);
-  }
-
-  async function logout() {
-    await face.auth.logout();
-    setIsLoggedIn(false);
-    setAccount({});
-  }
-
   const getAccountInfo = useCallback(async () => {
     const provider = new providers.Web3Provider(face.getEthLikeProvider(), 'any');
 
@@ -43,6 +30,19 @@ function LoginWithFace() {
 
     setAccount({ address, balance: balance.toString(), user });
   }, [face, setAccount]);
+
+  async function login() {
+    const res = await face.auth.login();
+    console.log('Login response:', res);
+    setIsLoggedIn(true);
+    getAccountInfo();
+  }
+
+  async function logout() {
+    await face.auth.logout();
+    setIsLoggedIn(false);
+    setAccount({});
+  }
 
   useEffect(() => {
     if (!face) {
