@@ -68,9 +68,9 @@ function TransactionErc721() {
     const signer = await provider.getSigner();
     const myAddress = await signer.getAddress();
     const transactionResponse = await signer.sendTransaction({
-      to: receiverAddress,
+      to: contractAddress,
       value: '0x0',
-      data: makeErc721Data('transferFrom', myAddress, contractAddress, BigNumber.from(tokenId)),
+      data: makeErc721Data('transferFrom', myAddress, receiverAddress, BigNumber.from(tokenId)),
     });
 
     setTxHash(transactionResponse.hash);
