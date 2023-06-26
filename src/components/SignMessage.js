@@ -2,7 +2,7 @@ import { providers } from 'ethers';
 import { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 
-import { faceAtom } from '../store';
+import { faceAtom, providerAtom } from '../store';
 import { accountAtom } from '../store/accountAtom';
 import Box from './common/Box';
 import Button from './common/Button';
@@ -15,11 +15,12 @@ function SignMessage() {
   const account = useRecoilValue(accountAtom);
   const [message, setMessage] = useState('');
   const [signedMessage, setSignedMessage] = useState('');
+  const provider = useRecoilValue(providerAtom);
 
   async function signMessage() {
-    const provider = new providers.Web3Provider(face.getEthLikeProvider(), 'any');
+    const ethersProvider = new providers.Web3Provider(provider, 'any');
 
-    const signer = await provider.getSigner();
+    const signer = await ethersProvider.getSigner();
     const response = await signer.signMessage(message);
 
     console.log('Signed message', response);

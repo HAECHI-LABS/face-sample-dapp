@@ -2,20 +2,47 @@ import { providers } from 'ethers';
 import { useCallback, useEffect, useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 
-import { faceAtom, providerAtom } from '../store';
+import { faceAtom, faceKitAtom, providerAtom } from '../store';
 import { accountAtom } from '../store/accountAtom';
 import Box from './common/Box';
 import Button from './common/Button';
 import Message from './common/Message';
 
-const title = 'Log in';
-function LoginWithFace() {
+const { Kit, getMetaMask, getWalletConnect, getWalletConnectLegacy } = window.FaceKit;
+const { LoginProvider } = window.FaceTypes;
+
+const title = 'Log in with kit';
+function LoginWithFaceKit() {
   const face = useRecoilValue(faceAtom);
+  const [faceKit, setFaceKit] = useRecoilState(faceKitAtom);
   const [, setAccount] = useRecoilState(accountAtom);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [provider, setProvider] = useRecoilState(providerAtom);
 
+  useEffect(() => {
+    if (face == null) {
+      return;
+    }
+    if (!faceKit) {
+      const kit = new Kit(face, {
+        providers: [LoginProvider.Apple, LoginProvider.Google, LoginProvider.Discord],
+        externalWalletOptions: {
+          wallets: [
+            getMetaMask(),
+            getWalletConnect({ options: { projectId: 'c4e1a0d62ff8a6c9211c5d4b12cc0d67' } }),
+            getWalletConnectLegacy(),
+          ],
+          expanded: false,
+        },
+      });
+      setFaceKit(kit);
+    }
+  }, [face, faceKit, setFaceKit]);
+
   const getAccountInfo = useCallback(async () => {
+    if (provider == null) {
+      return;
+    }
     const ethersProvider = new providers.Web3Provider(provider, 'any');
 
     const signer = await ethersProvider.getSigner();
@@ -32,11 +59,24 @@ function LoginWithFace() {
     setAccount({ address, balance: balance.toString(), user });
   }, [face, setAccount, provider]);
 
+  useEffect(() => {
+    if (provider == null) {
+      return;
+    }
+    getAccountInfo();
+  }, [provider, getAccountInfo]);
+
   async function login() {
-    const res = await face.auth.login();
-    console.log('Login response:', res);
+    if (!faceKit) {
+      return;
+    }
+    const connectResult = await faceKit.connect();
+    console.log('Connect result:', connectResult);
+    setProvider(await connectResult.connector.getProvider());
+
+    // const res = await face.auth.login();
+    // console.log('Login response:', res);
     setIsLoggedIn(true);
-    setProvider(face.getEthLikeProvider());
     getAccountInfo();
   }
 
@@ -44,7 +84,6 @@ function LoginWithFace() {
     await face.auth.logout();
     setIsLoggedIn(false);
     setAccount({});
-    setProvider(null);
   }
 
   useEffect(() => {
@@ -78,10 +117,10 @@ function LoginWithFace() {
           <Button onClick={logout}>Log out</Button>
         </>
       ) : (
-        <Button onClick={login}>Log in with Face wallet</Button>
+        <Button onClick={login}>Log in with Face wallet kit</Button>
       )}
     </Box>
   );
 }
 
-export default LoginWithFace;
+export default LoginWithFaceKit;

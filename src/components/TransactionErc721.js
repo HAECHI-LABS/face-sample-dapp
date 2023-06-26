@@ -1,16 +1,18 @@
-import { Network } from '@haechi-labs/face-sdk';
+// import { Network } from '@haechi-labs/face-sdk';
 import { BigNumber, providers } from 'ethers';
 import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 
 import { getExplorerUrl, makeErc721Data } from '../lib/utils';
-import { faceAtom } from '../store';
+import { faceAtom, providerAtom } from '../store';
 import { accountAtom } from '../store/accountAtom';
 import { networkAtom } from '../store/networkAtom';
 import Box from './common/Box';
 import Button from './common/Button';
 import Field from './common/Field';
 import Message from './common/Message';
+
+const { Network } = window.Face;
 
 const erc721ContractAddressMap = {
   [Network.ETH_MAINNET]: '',
@@ -34,6 +36,7 @@ function TransactionErc721() {
   const [tokenId, setTokenId] = useState('');
   const [contractAddress, setContractAddress] = useState('');
   const [receiverAddress, setReceiverAddress] = useState('');
+  const provider = useRecoilValue(providerAtom);
 
   useEffect(() => {
     // Set receiver to user account
@@ -63,9 +66,9 @@ function TransactionErc721() {
       return;
     }
 
-    const provider = new providers.Web3Provider(face.getEthLikeProvider(), 'any');
+    const ethersProvider = new providers.Web3Provider(provider, 'any');
 
-    const signer = await provider.getSigner();
+    const signer = await ethersProvider.getSigner();
     const myAddress = await signer.getAddress();
     const transactionResponse = await signer.sendTransaction({
       to: contractAddress,

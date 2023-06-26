@@ -1,7 +1,9 @@
-import { Network } from '@haechi-labs/face-sdk';
+// import { Network } from '@haechi-labs/face-sdk';
 import { ethers } from 'ethers';
 
 import { ERC20_ABI, ERC721_TRANSFER_ABI } from './abi';
+
+const { Network } = window.Face;
 
 export function makeErc20Data(functionFragment, to, value) {
   const ethersInterface = new ethers.utils.Interface(ERC20_ABI);

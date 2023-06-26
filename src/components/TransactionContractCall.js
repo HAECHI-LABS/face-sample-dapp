@@ -1,16 +1,18 @@
-import { Network } from '@haechi-labs/face-sdk';
+// import { Network } from '@haechi-labs/face-sdk';
 import { providers, utils } from 'ethers';
 import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 
 import { getExplorerUrl } from '../lib/utils';
-import { faceAtom } from '../store';
+import { faceAtom, providerAtom } from '../store';
 import { accountAtom } from '../store/accountAtom';
 import { networkAtom } from '../store/networkAtom';
 import Box from './common/Box';
 import Button from './common/Button';
 import Field from './common/Field';
 import Message from './common/Message';
+
+const { Network } = window.Face;
 
 const contractAddressMap = {
   [Network.ETH_MAINNET]: '',
@@ -34,6 +36,7 @@ function TransactionContractCall() {
   const [contractAddress, setContractAddress] = useState('');
   const [amount, setAmount] = useState('0');
   const [txData, setTxData] = useState('');
+  const provider = useRecoilValue(providerAtom);
 
   useEffect(() => {
     // Set default contract address
@@ -48,9 +51,9 @@ function TransactionContractCall() {
       return;
     }
 
-    const provider = new providers.Web3Provider(face.getEthLikeProvider(), 'any');
+    const ethersProvider = new providers.Web3Provider(provider, 'any');
 
-    const signer = await provider.getSigner();
+    const signer = await ethersProvider.getSigner();
     const transactionResponse = await signer.sendTransaction({
       to: contractAddress,
       value: utils.parseUnits(amount),

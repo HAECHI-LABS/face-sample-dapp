@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 
 import { getExplorerUrl } from '../lib/utils';
-import { faceAtom } from '../store';
+import { faceAtom, providerAtom } from '../store';
 import { accountAtom } from '../store/accountAtom';
 import { networkAtom } from '../store/networkAtom';
 import Box from './common/Box';
@@ -19,6 +19,7 @@ function TransactionPlatformCoin() {
   const [txHash, setTxHash] = useState('');
   const [amount, setAmount] = useState('0.001');
   const [receiverAddress, setReceiverAddress] = useState('');
+  const provider = useRecoilValue(providerAtom);
 
   useEffect(() => {
     // Set receiver to user account
@@ -28,9 +29,9 @@ function TransactionPlatformCoin() {
   }, [account.address]);
 
   async function sendTransaction() {
-    const provider = new providers.Web3Provider(face.getEthLikeProvider(), 'any');
+    const ethersProvider = new providers.Web3Provider(provider, 'any');
 
-    const signer = await provider.getSigner();
+    const signer = await ethersProvider.getSigner();
     const transactionResponse = await signer.sendTransaction({
       to: receiverAddress,
       value: utils.parseUnits(amount),

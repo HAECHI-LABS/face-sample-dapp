@@ -1,4 +1,4 @@
-import { Network } from '@haechi-labs/face-sdk';
+// import { Network } from '@haechi-labs/face-sdk';
 import { ethers, providers, utils } from 'ethers';
 import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
@@ -6,12 +6,15 @@ import { useRecoilValue } from 'recoil';
 import { ERC20_ABI } from '../lib/abi';
 import { getExplorerUrl, makeErc20Data } from '../lib/utils';
 import { faceAtom } from '../store';
+import { providerAtom } from '../store';
 import { accountAtom } from '../store/accountAtom';
 import { networkAtom } from '../store/networkAtom';
 import Box from './common/Box';
 import Button from './common/Button';
 import Field from './common/Field';
 import Message from './common/Message';
+
+const { Network } = window.Face;
 
 const erc20ContractAddressMap = {
   [Network.ETH_MAINNET]: '0x8A904F0Fb443D62B6A2835483b087aBECF93a137',
@@ -36,6 +39,7 @@ function TransactionErc20() {
   const [contractAddress, setContractAddress] = useState('');
   const [receiverAddress, setReceiverAddress] = useState('');
   const [balance, setBalance] = useState('');
+  const provider = useRecoilValue(providerAtom);
 
   useEffect(() => {
     // Set receiver to user account
@@ -65,9 +69,9 @@ function TransactionErc20() {
       return;
     }
 
-    const provider = new providers.Web3Provider(face.getEthLikeProvider(), 'any');
+    const ethersProvider = new providers.Web3Provider(provider, 'any');
 
-    const signer = await provider.getSigner();
+    const signer = await ethersProvider.getSigner();
     const transactionResponse = await signer.sendTransaction({
       to: contractAddress,
       value: '0x0',
@@ -91,8 +95,8 @@ function TransactionErc20() {
       return;
     }
 
-    const provider = new providers.Web3Provider(face.getEthLikeProvider(), 'any');
-    const contract = new ethers.Contract(contractAddress, ERC20_ABI, provider);
+    const ethersProvider = new providers.Web3Provider(provider, 'any');
+    const contract = new ethers.Contract(contractAddress, ERC20_ABI, ethersProvider);
     const balance = await contract.balanceOf(account.address);
 
     setBalance(utils.formatUnits(balance));
