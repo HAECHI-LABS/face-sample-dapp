@@ -25,6 +25,8 @@ export function getExplorerUrl(network) {
     [Network.KLAYTN]: 'https://www.klaytnfinder.io/tx/',
     [Network.BORA]: 'https://scope.boraportal.com/tx/',
     [Network.BORA_TESTNET]: 'https://scope.boraportal.com/tx/',
+    [Network.NEAR]: 'https://explorer.near.org/transactions/tx}',
+    [Network.NEAR_TESTNET]: 'https://explorer.testnet.near.org/transactions/tx',
   };
 
   return explorerMap[network];
