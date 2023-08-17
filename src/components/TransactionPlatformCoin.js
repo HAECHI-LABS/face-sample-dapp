@@ -1,8 +1,12 @@
-import { providers, utils } from 'ethers';
+import { Blockchain, isEthlikeBlockchain, networkToBlockchain } from '@haechi-labs/face-types';
+import { ethers, providers, utils } from 'ethers';
+import { poll } from 'ethers/lib/utils';
+import * as nearAPI from 'near-api-js';
 import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 
-import { getExplorerUrl } from '../lib/utils';
+import { config as nearConfig } from '../config/near';
+import { getExplorerUrl, getProvider } from '../lib/utils';
 import { faceAtom } from '../store';
 import { accountAtom } from '../store/accountAtom';
 import { networkAtom } from '../store/networkAtom';
@@ -28,21 +32,79 @@ function TransactionPlatformCoin() {
   }, [account.address]);
 
   async function sendTransaction() {
-    const provider = new providers.Web3Provider(face.getEthLikeProvider(), 'any');
+    let sentTx;
+    const blockchain = networkToBlockchain(face.network);
+    if (isEthlikeBlockchain(blockchain)) {
+      const provider = new providers.Web3Provider(face.getEthLikeProvider(), 'any');
+      const signer = await provider.getSigner();
+      const transactionResponse = await signer.sendTransaction({
+        to: receiverAddress,
+        value: utils.parseUnits(amount),
+      });
+      sentTx = {
+        hash: transactionResponse.hash,
+        wait: async () => {
+          const receipt = await transactionResponse.wait();
+          return {
+            status: receipt.status === 1,
+            internal: receipt,
+          };
+        },
+      };
+    } else if (blockchain === Blockchain.NEAR) {
+      const nearProvider = face.near.getProvider();
+      const publicKey = (await nearProvider.getPublicKeys())[0];
+      const senderAddress = ethers.utils.hexlify(publicKey.data);
+      const provider = new nearAPI.providers.JsonRpcProvider({ url: getProvider(face.network) });
+      const accessKey = await provider
+        .query(`access_key/${senderAddress}/${publicKey.toString()}`, '')
+        .catch(() => ({ nonce: 0 }));
+      const nonce = accessKey.nonce + 1;
+      const actions = [nearAPI.transactions.transfer(amount)];
 
-    const signer = await provider.getSigner();
-    const transactionResponse = await signer.sendTransaction({
-      to: receiverAddress,
-      value: utils.parseUnits(amount),
-    });
+      const near = await nearAPI.connect(nearConfig(network));
 
-    setTxHash(transactionResponse.hash);
+      const status = await near.connection.provider.status();
+
+      const blockHash = status.sync_info.latest_block_hash;
+      const serializedBlockHash = nearAPI.utils.serialize.base_decode(blockHash);
+      const tx = nearAPI.transactions.createTransaction(
+        senderAddress,
+        publicKey,
+        receiverAddress,
+        nonce,
+        actions,
+        serializedBlockHash
+      );
+      const result = await nearProvider.signAndSendTransaction(tx);
+      sentTx = {
+        hash: result,
+        wait: async () => {
+          return await poll(async () => {
+            try {
+              const receipt = await provider.txStatus(result, senderAddress);
+              return {
+                status: Object.keys(receipt.status).includes('SuccessValue'),
+                internal: receipt,
+              };
+            } catch (e) {
+              console.debug('polling error', e);
+              return undefined;
+            }
+          });
+        },
+      };
+    } else {
+      throw new Error('unknown blockchain ' + blockchain);
+    }
+
+    setTxHash(sentTx.hash);
 
     console.group('[Transaction Information]');
-    console.log('Transaction response:', transactionResponse);
-    console.log('Explorer Link:', `${getExplorerUrl(network)}${transactionResponse.hash}`);
+    console.log('Transaction response:', sentTx);
+    console.log('Explorer Link:', `${getExplorerUrl(network)}${sentTx.hash}`);
 
-    const receipt = await transactionResponse.wait();
+    const receipt = await sentTx.wait();
     console.log('Transaction receipt', receipt);
     console.groupEnd();
   }
