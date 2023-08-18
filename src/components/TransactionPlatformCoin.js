@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 
 import { config as nearConfig } from '../config/near';
+import { createPlatformCoin } from '../lib/types';
 import { getExplorerUrl, getProvider } from '../lib/utils';
 import { faceAtom } from '../store';
 import { accountAtom } from '../store/accountAtom';
@@ -33,13 +34,14 @@ function TransactionPlatformCoin() {
 
   async function sendTransaction() {
     let sentTx;
-    const blockchain = networkToBlockchain(face.network);
+    const blockchain = networkToBlockchain(network);
+    const coinAmount = createPlatformCoin(amount, blockchain);
     if (isEthlikeBlockchain(blockchain)) {
       const provider = new providers.Web3Provider(face.getEthLikeProvider(), 'any');
       const signer = await provider.getSigner();
       const transactionResponse = await signer.sendTransaction({
         to: receiverAddress,
-        value: utils.parseUnits(amount),
+        value: coinAmount.toHexAmount(),
       });
       sentTx = {
         hash: transactionResponse.hash,
@@ -55,12 +57,12 @@ function TransactionPlatformCoin() {
       const nearProvider = face.near.getProvider();
       const publicKey = (await nearProvider.getPublicKeys())[0];
       const senderAddress = ethers.utils.hexlify(publicKey.data);
-      const provider = new nearAPI.providers.JsonRpcProvider({ url: getProvider(face.network) });
+      const provider = new nearAPI.providers.JsonRpcProvider({ url: getProvider(network) });
       const accessKey = await provider
         .query(`access_key/${senderAddress}/${publicKey.toString()}`, '')
         .catch(() => ({ nonce: 0 }));
       const nonce = accessKey.nonce + 1;
-      const actions = [nearAPI.transactions.transfer(amount)];
+      const actions = [nearAPI.transactions.transfer(coinAmount.toDecimalAmountAsString())];
 
       const near = await nearAPI.connect(nearConfig(network));
 
