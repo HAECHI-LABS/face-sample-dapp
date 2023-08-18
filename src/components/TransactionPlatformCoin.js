@@ -56,7 +56,7 @@ function TransactionPlatformCoin() {
     } else if (blockchain === Blockchain.NEAR) {
       const nearProvider = face.near.getProvider();
       const publicKey = (await nearProvider.getPublicKeys())[0];
-      const senderAddress = ethers.utils.hexlify(publicKey.data);
+      const senderAddress = ethers.utils.hexlify(publicKey.data).slice(2);
       const provider = new nearAPI.providers.JsonRpcProvider({ url: getProvider(network) });
       const accessKey = await provider
         .query(`access_key/${senderAddress}/${publicKey.toString()}`, '')

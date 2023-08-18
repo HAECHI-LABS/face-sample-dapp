@@ -61,9 +61,9 @@ export function getProvider(network) {
     case Network.SOLANA:
       return 'https://api.mainnet-beta.solana.com';
     case Network.NEAR:
-      return 'https://near-mainnet.infura.io/v3/c36d434dfda34fb5b7382de82565be43';
+      return 'https://rpc.mainnet.near.org';
     case Network.NEAR_TESTNET:
-      return 'https://near-testnet.infura.io/v3/c36d434dfda34fb5b7382de82565be43';
+      return 'https://rpc.testnet.near.org';
     case Network.APTOS:
       return 'https://fullnode.mainnet.aptoslabs.com/v1';
     case Network.APTOS_TESTNET:

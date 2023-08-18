@@ -26,9 +26,8 @@ function LoginWithFace() {
       const nearProvider = face.near.getProvider();
       const publicKeys = await nearProvider.getPublicKeys();
       const near = await nearAPI.connect(nearConfig(face.network));
-      const account = await near.account(address);
-
       address = Buffer.from(publicKeys[0].data).toString('hex');
+      const account = await near.account(address);
       balance = await account
         .getAccountBalance()
         .then((bal) => {
