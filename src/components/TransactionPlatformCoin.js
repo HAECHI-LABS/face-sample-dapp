@@ -1,5 +1,5 @@
 import { Blockchain, isEthlikeBlockchain, networkToBlockchain } from '@haechi-labs/face-types';
-import { ethers, providers, utils } from 'ethers';
+import { ethers, providers } from 'ethers';
 import { poll } from 'ethers/lib/utils';
 import * as nearAPI from 'near-api-js';
 import { useEffect, useState } from 'react';
