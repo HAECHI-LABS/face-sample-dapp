@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 
 import { faceAtom } from '../store';
+import { accountAtom } from '../store/accountAtom';
 import Box from './common/Box';
 import Button from './common/Button';
 import Message from './common/Message';
@@ -9,13 +9,7 @@ import Message from './common/Message';
 const title = 'Wallet Connect';
 function WalletConnect() {
   const face = useRecoilValue(faceAtom);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  useEffect(() => {
-    if (face) {
-      face.auth.isLoggedIn().then((re) => setIsLoggedIn(re));
-    }
-  }, [face]);
+  const account = useRecoilValue(accountAtom);
 
   if (!face) {
     return (
@@ -24,7 +18,7 @@ function WalletConnect() {
       </Box>
     );
   }
-  if (!isLoggedIn) {
+  if (!account.balance || !account.address) {
     return (
       <Box title={title}>
         <Message type="danger">You must log in first.</Message>
