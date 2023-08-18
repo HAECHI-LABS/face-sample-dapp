@@ -1,4 +1,5 @@
 import { Network } from '@haechi-labs/face-sdk';
+import BN from 'bn.js';
 import { ethers } from 'ethers';
 
 import { ERC20_ABI, ERC721_TRANSFER_ABI } from './abi';
@@ -91,4 +92,11 @@ export function getProvider(network) {
     default:
       throw Error(`cannot resolve provider with network : ${network}`);
   }
+}
+
+export function calcNearTgas(tgas) {
+  // 1 tgas == 0.0001 near
+  // 1 tgas === 1000000000000 BN
+  tgas *= 1000000000000;
+  return new BN(`${tgas}`, 10);
 }

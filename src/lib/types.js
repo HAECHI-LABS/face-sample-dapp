@@ -1,4 +1,8 @@
-import { getPlatFormCoinDecimalByBlockchain, isEthlikeBlockchain } from '@haechi-labs/face-types';
+import {
+  Blockchain,
+  getPlatFormCoinDecimalByBlockchain,
+  isEthlikeBlockchain,
+} from '@haechi-labs/face-types';
 import { ethers } from 'ethers';
 
 export class Coin {
@@ -47,4 +51,28 @@ function createNonEthCoin(amount, blockchain) {
     data: ethers.utils.parseUnits(amount, decimal),
     decimal: decimal,
   });
+}
+
+export function createLargeDecimalFT(amount, blockchain) {
+  if (isEthlikeBlockchain(blockchain)) {
+    return new Coin({
+      data: ethers.utils.parseEther(amount),
+      decimal: 18,
+    });
+  }
+  if (Blockchain.SOLANA === blockchain) {
+    return new Coin({
+      data: ethers.utils.parseUnits(amount, 9),
+      decimal: 9,
+    });
+  }
+
+  if (Blockchain.NEAR === blockchain) {
+    return new Coin({
+      data: ethers.utils.parseUnits(amount, 18),
+      decimal: 18,
+    });
+  }
+
+  throw new Error('unknown blockchain for faucet');
 }
