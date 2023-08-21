@@ -30,6 +30,8 @@ const erc20ContractAddressMap = {
   [Network.KLAYTN_TESTNET]: '0xb5567463c35dE682072A669425d6776B178Be3E4',
   [Network.BORA]: '0x797115bcdbD85DC865222724eD67d473CE168962',
   [Network.BORA_TESTNET]: '0x3d5cb6Be01f218CCA1Ec077028F2CFDC943A36f6',
+  [Network.NEAR]: 'facewallet.testnet',
+  [Network.NEAR_TESTNET]: 'facewallet.testnet',
 };
 
 const title = 'Fungible Token Transaction';
@@ -75,7 +77,7 @@ function TransactionErc20() {
       const nearProvider = face.near.getProvider();
       const publicKey = (await nearProvider.getPublicKeys())[0];
 
-      const senderAddress = ethers.utils.hexlify(publicKey.data);
+      const senderAddress = ethers.utils.hexlify(publicKey.data).slice(2);
 
       const provider = new nearAPI.providers.JsonRpcProvider({ url: getProvider(network) });
       const accessKey = await provider
