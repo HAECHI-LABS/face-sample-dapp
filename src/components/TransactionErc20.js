@@ -1,10 +1,16 @@
 import { Network } from '@haechi-labs/face-sdk';
+import { networkToBlockchain } from '@haechi-labs/face-types';
+import BN from 'bn.js';
 import { ethers, providers, utils } from 'ethers';
+import { poll } from 'ethers/lib/utils';
+import * as nearAPI from 'near-api-js';
 import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 
+import { config as nearConfig } from '../config/near';
 import { ERC20_ABI } from '../lib/abi';
-import { getExplorerUrl, makeErc20Data } from '../lib/utils';
+import { createLargeDecimalFT } from '../lib/types';
+import { calcNearTgas, getExplorerUrl, getProvider, makeErc20Data } from '../lib/utils';
 import { faceAtom } from '../store';
 import { accountAtom } from '../store/accountAtom';
 import { networkAtom } from '../store/networkAtom';
@@ -24,6 +30,8 @@ const erc20ContractAddressMap = {
   [Network.KLAYTN_TESTNET]: '0xb5567463c35dE682072A669425d6776B178Be3E4',
   [Network.BORA]: '0x797115bcdbD85DC865222724eD67d473CE168962',
   [Network.BORA_TESTNET]: '0x3d5cb6Be01f218CCA1Ec077028F2CFDC943A36f6',
+  [Network.NEAR]: 'facewallet.testnet',
+  [Network.NEAR_TESTNET]: 'facewallet.testnet',
 };
 
 const title = 'Fungible Token Transaction';
@@ -65,24 +73,97 @@ function TransactionErc20() {
       return;
     }
 
-    const provider = new providers.Web3Provider(face.getEthLikeProvider(), 'any');
+    if (network === Network.NEAR || network === Network.NEAR_TESTNET) {
+      const nearProvider = face.near.getProvider();
+      const publicKey = (await nearProvider.getPublicKeys())[0];
 
-    const signer = await provider.getSigner();
-    const transactionResponse = await signer.sendTransaction({
-      to: contractAddress,
-      value: '0x0',
-      data: makeErc20Data('transfer', receiverAddress, utils.parseUnits(amount)),
-    });
+      const senderAddress = ethers.utils.hexlify(publicKey.data).slice(2);
 
-    setTxHash(transactionResponse.hash);
+      const provider = new nearAPI.providers.JsonRpcProvider({ url: getProvider(network) });
+      const accessKey = await provider
+        .query(`access_key/${senderAddress}/${publicKey.toString()}`, '')
+        .catch(() => ({ nonce: 0 }));
 
-    console.group('[Transaction Information]');
-    console.log('Transaction response:', transactionResponse);
-    console.log('Explorer Link:', `${getExplorerUrl(network)}${transactionResponse.hash}`);
+      const nonce = accessKey.nonce + 1;
+      const actions = [
+        nearAPI.transactions.functionCall(
+          'ft_transfer',
+          {
+            receiver_id: receiverAddress,
+            amount: createLargeDecimalFT(
+              amount,
+              networkToBlockchain(network)
+            ).toDecimalAmountAsString(),
+          },
+          calcNearTgas(6),
+          new BN('1', 10)
+        ),
+      ];
+      const near = await nearAPI.connect(nearConfig(network));
 
-    const receipt = await transactionResponse.wait();
-    console.log('Transaction receipt', receipt);
-    console.groupEnd();
+      const status = await near.connection.provider.status();
+
+      const blockHash = status.sync_info.latest_block_hash;
+      const serializedBlockHash = nearAPI.utils.serialize.base_decode(blockHash);
+
+      const tx = nearAPI.transactions.createTransaction(
+        senderAddress,
+        publicKey,
+        contractAddress,
+        nonce,
+        actions,
+        serializedBlockHash
+      );
+      const result = await nearProvider.signAndSendTransaction(tx);
+
+      setTxHash(result);
+
+      const sentTx = {
+        hash: result,
+        wait: async () => {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          return await poll(async () => {
+            try {
+              const receipt = await provider.txStatus(result, senderAddress);
+              return {
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                status: Object.keys(receipt.status).includes('SuccessValue'),
+                internal: receipt,
+              };
+            } catch (e) {
+              return undefined;
+            }
+          });
+        },
+      };
+
+      console.group('[Transaction Information]');
+      console.log('Transaction response:', sentTx);
+      console.log('Explorer Link:', `${getExplorerUrl(network, sentTx.hash)}`);
+
+      const receipt = await sentTx.wait();
+      console.log('Transaction receipt', receipt);
+      console.groupEnd();
+    } else {
+      const provider = new providers.Web3Provider(face.getEthLikeProvider(), 'any');
+
+      const signer = await provider.getSigner();
+      const transactionResponse = await signer.sendTransaction({
+        to: contractAddress,
+        value: '0x0',
+        data: makeErc20Data('transfer', receiverAddress, utils.parseUnits(amount)),
+      });
+
+      setTxHash(transactionResponse.hash);
+
+      console.group('[Transaction Information]');
+      console.log('Transaction response:', transactionResponse);
+      console.log('Explorer Link:', `${getExplorerUrl(network)}${transactionResponse.hash}`);
+
+      const receipt = await transactionResponse.wait();
+      console.log('Transaction receipt', receipt);
+      console.groupEnd();
+    }
   }
 
   async function getBalance() {
@@ -91,11 +172,16 @@ function TransactionErc20() {
       return;
     }
 
-    const provider = new providers.Web3Provider(face.getEthLikeProvider(), 'any');
-    const contract = new ethers.Contract(contractAddress, ERC20_ABI, provider);
-    const balance = await contract.balanceOf(account.address);
-
-    setBalance(utils.formatUnits(balance));
+    if (network === Network.NEAR || network === Network.NEAR_TESTNET) {
+      const provider = face.near.getProvider();
+      const balance = await provider.getBalance(account.address, contractAddress);
+      setBalance(utils.formatUnits(balance));
+    } else {
+      const provider = new providers.Web3Provider(face.getEthLikeProvider(), 'any');
+      const contract = new ethers.Contract(contractAddress, ERC20_ABI, provider);
+      const balance = await contract.balanceOf(account.address);
+      setBalance(utils.formatUnits(balance));
+    }
   }
 
   if (!face) {

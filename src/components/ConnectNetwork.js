@@ -1,9 +1,9 @@
-import {Face, Network} from '@haechi-labs/face-sdk';
-import {useRecoilState} from 'recoil';
+import { Face, Network } from '@haechi-labs/face-sdk';
+import { useRecoilState } from 'recoil';
 
-import {resolveApiKey} from '../config/apiKey';
-import {faceAtom} from '../store';
-import {networkAtom} from '../store/networkAtom';
+import { resolveApiKey } from '../config/apiKey';
+import { faceAtom } from '../store';
+import { networkAtom } from '../store/networkAtom';
 import Box from './common/Box';
 import Button from './common/Button';
 import Message from './common/Message';
@@ -19,6 +19,8 @@ const networkList = [
   Network.BAOBAB,
   Network.BORA,
   Network.BORA_TESTNET,
+  Network.NEAR,
+  Network.NEAR_TESTNET,
 ];
 
 const title = 'Connect Network';
@@ -49,29 +51,33 @@ function ConnectNetwork() {
   const resolveNetworkName = (network) => {
     switch (network) {
       case Network.ETHEREUM:
-        return "Ethereum";
+        return 'Ethereum';
       case Network.GOERLI:
         return 'Goerli';
       case Network.POLYGON:
-        return "Polygon";
+        return 'Polygon';
       case Network.MUMBAI:
         return 'Mumbai';
       case Network.BNB_SMART_CHAIN:
-        return "BNB Smart Chain";
+        return 'BNB Smart Chain';
       case Network.BNB_SMART_CHAIN_TESTNET:
         return 'BNB Smart Chain Testnet';
       case Network.KLAYTN:
-        return "Klaytn";
+        return 'Klaytn';
       case Network.BAOBAB:
         return 'Baobab';
       case Network.BORA:
-        return "Bora";
+        return 'Bora';
       case Network.BORA_TESTNET:
         return 'Bora Testnet';
+      case Network.NEAR:
+        return 'NEAR';
+      case Network.NEAR_TESTNET:
+        return 'NEAR Testnet';
       default:
-        throw new Error("unsupported network error");
+        throw new Error('unsupported network error');
     }
-  }
+  };
 
   return (
     <Box title={title}>

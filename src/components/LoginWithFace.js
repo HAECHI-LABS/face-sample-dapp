@@ -1,7 +1,10 @@
-import { providers } from 'ethers';
+import { Blockchain, isEthlikeBlockchain, networkToBlockchain } from '@haechi-labs/face-types';
+import { BigNumber, providers } from 'ethers';
+import * as nearAPI from 'near-api-js';
 import { useCallback, useEffect, useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 
+import { config as nearConfig } from '../config/near';
 import { faceAtom } from '../store';
 import { accountAtom } from '../store/accountAtom';
 import Box from './common/Box';
@@ -15,12 +18,33 @@ function LoginWithFace() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const getAccountInfo = useCallback(async () => {
-    const provider = new providers.Web3Provider(face.getEthLikeProvider(), 'any');
-
-    const signer = await provider.getSigner();
-    const address = await signer.getAddress();
-    const balance = await signer.getBalance();
+    const blockchain = networkToBlockchain(face.network);
     const user = await face.auth.getCurrentUser();
+    let address, balance;
+
+    if (blockchain === Blockchain.NEAR) {
+      const nearProvider = face.near.getProvider();
+      const publicKeys = await nearProvider.getPublicKeys();
+      const near = await nearAPI.connect(nearConfig(face.network));
+      address = Buffer.from(publicKeys[0].data).toString('hex');
+      const account = await near.account(address);
+      balance = await account
+        .getAccountBalance()
+        .then((bal) => {
+          return BigNumber.from(bal.total);
+        })
+        .catch(() => {
+          return BigNumber.from('0');
+        });
+    } else if (isEthlikeBlockchain(blockchain)) {
+      const provider = new providers.Web3Provider(face.getEthLikeProvider(), 'any');
+
+      const signer = await provider.getSigner();
+      address = await signer.getAddress();
+      balance = await signer.getBalance();
+    } else {
+      throw new Error('unknown blockchain ' + blockchain);
+    }
 
     console.group('[Account Information]');
     console.log('Balance:', balance);

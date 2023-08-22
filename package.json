@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "http://haechi-labs.github.io/face-sample-dapp",
   "dependencies": {
+    "@craco/craco": "^7.1.0",
     "@haechi-labs/face-sdk": "^1.10.10",
     "@haechi-labs/face-types": "^1.10.10",
     "@testing-library/jest-dom": "^5.16.4",
@@ -11,6 +12,7 @@
     "@testing-library/user-event": "^13.5.0",
     "bulma": "^0.9.4",
     "ethers": "^5.6.9",
+    "near-api-js": "^1.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
@@ -18,11 +20,11 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "craco start",
+    "build": "craco build",
     "predeploy": "yarn run build",
     "deploy": "gh-pages -d build",
-    "eject": "react-scripts eject"
+    "eject": "craco eject"
   },
   "eslintConfig": {
     "extends": [
