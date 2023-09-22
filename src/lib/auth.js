@@ -85,7 +85,6 @@ export async function customTokenLogin(
         throw new Error(`Unknown provider ${provider}`)
   }
   const listener = async (e) => {
-    console.log(e);
     if (e.origin !== 'https://us-central1-prj-d-face.cloudfunctions.net') {
       return;
     }
