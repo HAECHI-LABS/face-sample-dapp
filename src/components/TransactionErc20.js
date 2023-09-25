@@ -121,12 +121,12 @@ function TransactionErc20() {
       const sentTx = {
         hash: result,
         wait: async () => {
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          // eslint-disable-next-line
           return await poll(async () => {
             try {
               const receipt = await provider.txStatus(result, senderAddress);
               return {
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                // eslint-disable-next-line
                 status: Object.keys(receipt.status).includes('SuccessValue'),
                 internal: receipt,
               };

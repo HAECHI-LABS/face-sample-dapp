@@ -216,3 +216,18 @@ svg.logo {
     margin-top: 8px;
   }
 }
+
+table {
+  border-collapse: collapse;
+}
+
+th {
+  text-align: left;
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
