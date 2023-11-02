@@ -1,4 +1,4 @@
-import { Blockchain, isEthlikeBlockchain, networkToBlockchain } from '@haechi-labs/face-types';
+import { Blockchain, isEthlikeBlockchain, LoginProvider, networkToBlockchain } from '@haechi-labs/face-types';
 import { BigNumber, providers } from 'ethers';
 import * as nearAPI from 'near-api-js';
 import { useCallback, useEffect, useState } from 'react';
@@ -7,6 +7,7 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { config as nearConfig } from '../config/near';
 import { faceAtom } from '../store';
 import { accountAtom } from '../store/accountAtom';
+import CheckboxList from './CheckboxList';
 import Box from './common/Box';
 import Button from './common/Button';
 import Message from './common/Message';
@@ -16,6 +17,7 @@ function LoginWithFace() {
   const face = useRecoilValue(faceAtom);
   const [, setAccount] = useRecoilState(accountAtom);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [loginProviders, setLoginProviders] = useState([]);
 
   const getAccountInfo = useCallback(async () => {
     const blockchain = networkToBlockchain(face.network);
@@ -56,7 +58,7 @@ function LoginWithFace() {
   }, [face, setAccount]);
 
   async function login() {
-    const res = await face.auth.login();
+    const res = await face.auth.login(loginProviders.length ? loginProviders : undefined);
     console.log('Login response:', res);
     setIsLoggedIn(true);
     getAccountInfo();
@@ -82,6 +84,17 @@ function LoginWithFace() {
     });
   }, [face, getAccountInfo]);
 
+  async function socialLogin(provider) {
+    try {
+      const res = await face.auth.directSocialLogin(provider);
+      console.log('Social Login response:', res);
+      setIsLoggedIn(true);
+      getAccountInfo();
+    } catch (e) {
+      console.error('Social Login failed:', e);
+    }
+  }
+
   if (!face) {
     return (
       <Box title={title}>
@@ -99,7 +112,20 @@ function LoginWithFace() {
           <Button onClick={logout}>Log out</Button>
         </>
       ) : (
-        <Button onClick={login}>Log in with Face wallet</Button>
+        <>
+          <CheckboxList
+            items={Object.values(LoginProvider).map((p) => ({ key: p }))}
+            state={loginProviders}
+            setState={setLoginProviders}
+          />
+          <Button onClick={login}>Log in with Face wallet</Button>
+          <Button onClick={() => socialLogin('google.com')}>Google login</Button>
+          <Button onClick={() => socialLogin('apple.com')}>Apple login</Button>
+          <Button onClick={() => socialLogin('facebook.com')}>Facebook login</Button>
+          <Button onClick={() => socialLogin('twitter.com')}>Twitter login</Button>
+          <Button onClick={() => socialLogin('kakao.com')}>Kakao login</Button>
+          <Button onClick={() => socialLogin('discord.com')}>Discord login</Button>
+        </>
       )}
     </Box>
   );
