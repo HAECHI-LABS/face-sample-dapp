@@ -18,14 +18,15 @@ function App() {
       <GNB />
       <AccountInformation />
       <div className="wrapper">
-        <ConnectNetwork />
+        <WagiConnect />
+        {/* <ConnectNetwork />
         <LoginWithFace />
         <WalletConnect />
         <TransactionPlatformCoin />
         <TransactionErc20 />
         <TransactionErc721 />
         <TransactionContractCall />
-        <SignMessage />
+        <SignMessage /> */}
       </div>
     </div>
   );
