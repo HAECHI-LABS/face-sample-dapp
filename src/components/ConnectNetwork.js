@@ -36,6 +36,9 @@ function ConnectNetwork() {
     const face = new Face({
       apiKey: resolveApiKey(network),
       network: network,
+      notificationOptions: { 
+        type: 'toast'
+      }
     });
     setFace(face);
   };

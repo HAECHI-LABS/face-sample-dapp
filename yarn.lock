@@ -1561,21 +1561,22 @@
     "@ethersproject/properties" "^5.6.0"
     "@ethersproject/strings" "^5.6.1"
 
-"@haechi-labs/face-sdk@^1.10.10":
-  version "1.10.10"
-  resolved "https://registry.npmjs.org/@haechi-labs/face-sdk/-/face-sdk-1.10.10.tgz"
-  integrity sha512-sbWGLsm/zxuXoEdJxjIlPA4ebAfUt7gy/5JrHZFhdQSH7egPjqpvlHl0jNFNnK7sUPurHWG2ltAnStrtp8s28g==
+"@haechi-labs/face-sdk@^1.11.2":
+  version "1.11.2"
+  resolved "https://registry.yarnpkg.com/@haechi-labs/face-sdk/-/face-sdk-1.11.2.tgz#6e533a04622d9dfd004eb6d3c2bb25170c4cd467"
+  integrity sha512-nZijVP1mwS0W9PEnKAy5DIjwYfsoajiC9T9rH4+Z1sRRYDn9x25ydrurKQwLfdcL/vqmQGR5GOgdpeUA1Z1oIQ==
   dependencies:
     "@aptos-labs/wallet-adapter-core" "^2.2.0"
     "@noble/hashes" "^1.3.0"
     "@solana/web3.js" "^1.73.0"
     aptos "1.6.0"
+    events "^3.3.0"
     near-api-js "^1.1.0"
 
-"@haechi-labs/face-types@^1.10.10":
-  version "1.10.10"
-  resolved "https://registry.npmjs.org/@haechi-labs/face-types/-/face-types-1.10.10.tgz"
-  integrity sha512-Xl9AVzoPQQx2MNbgnIJKKhpvMkqnKbBRuQ8cfdMmeziY9ikv9Y92gCyAJZgCmkKlkHyjB8+9GUz0W/OL1IrjYA==
+"@haechi-labs/face-types@^1.11.1":
+  version "1.11.1"
+  resolved "https://registry.yarnpkg.com/@haechi-labs/face-types/-/face-types-1.11.1.tgz#986802f0bfc4046bad433ad2e6bd6ee5755ea8fe"
+  integrity sha512-vnXiecfmfbSPa0TXkzYQEkLs1PSrUJINi6rYYTahkxlmuNIxZUdY8VLUCTYBCBjNZg36tx0IhNup2vxn3DYVQw==
 
 "@humanwhocodes/config-array@^0.9.2":
   version "0.9.5"
@@ -4993,9 +4994,9 @@ eventemitter3@^5.0.1:
   resolved "https://registry.npmjs.org/eventemitter3/-/eventemitter3-5.0.1.tgz"
   integrity sha512-GWkBvjiSZK87ELrYOSESUYeVIc9mvLLf/nXalMOS5dYrgZq9o5OVkbZAVM06CVxYsCwH9BDZFPlQTlPA1j4ahA==
 
-events@^3.2.0:
+events@^3.2.0, events@^3.3.0:
   version "3.3.0"
-  resolved "https://registry.npmjs.org/events/-/events-3.3.0.tgz"
+  resolved "https://registry.yarnpkg.com/events/-/events-3.3.0.tgz#31a95ad0a924e2d2c419a813aeb2c4e878ea7400"
   integrity sha512-mQw+2fkQbALzQ7V0MY0IqdnXNOeTtP4r0lN9z7AAawCXgqea7bDii20AYrIBrFd/Hx0M2Ocz6S111CaFkUcb0Q==
 
 execa@^5.0.0:
