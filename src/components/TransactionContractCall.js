@@ -13,14 +13,14 @@ import Field from './common/Field';
 import Message from './common/Message';
 
 const contractAddressMap = {
-  [Network.ETH_MAINNET]: '',
-  [Network.ETH_TESTNET]: '0xAE5c1CF9C362CFD6B5F94e00Eacb8D406429B35a',
-  [Network.MATIC_MAINNET]: '',
-  [Network.MATIC_TESTNET]: '0xe63c2f4bdd0df2b18b0a4e0210d4b1e95a23dff9',
-  [Network.BINANCE_COIN_MAINNET]: '',
-  [Network.BINANCE_COIN_TESTNET]: '0x33d24CdD4a858BC2965568717C7D11eC38650c56',
-  [Network.KLAYTN_MAINNET]: '',
-  [Network.KLAYTN_TESTNET]: '0xfe72540387e1F9aeFAC07D230dAE1865ad2E733c',
+  [Network.ETHEREUM]: '',
+  [Network.GOERLI]: '0xF1e0C4576F4d7601B9aBDAe7eBbA8f9af3bEd249',
+  [Network.POLYGON]: '',
+  [Network.MUMBAI]: '0xe63c2f4bdd0df2b18b0a4e0210d4b1e95a23dff9',
+  [Network.BNB_SMART_CHAIN]: '',
+  [Network.BNB_SMART_CHAIN_TESTNET]: '0x33d24CdD4a858BC2965568717C7D11eC38650c56',
+  [Network.KLAYTN]: '',
+  [Network.BAOBAB]: '0xfe72540387e1F9aeFAC07D230dAE1865ad2E733c',
   [Network.BORA]: '0x5f07F73c6b3B0F02AB5821e7c1a2E3BcF6A78Bc6',
   [Network.BORA_TESTNET]: '0x10791D8c364DC71928e4F1484a5a7344568d6365',
 };

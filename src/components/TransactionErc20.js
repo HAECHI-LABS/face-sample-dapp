@@ -20,17 +20,17 @@ import Field from './common/Field';
 import Message from './common/Message';
 
 const erc20ContractAddressMap = {
-  [Network.ETH_MAINNET]: '0x8A904F0Fb443D62B6A2835483b087aBECF93a137',
-  [Network.ETH_TESTNET]: '0x6558820324875d2747a32B7D37496fd473AD7648',
-  [Network.MATIC_MAINNET]: '0xfce04dd232006d0da001f6d54bb5a7fc969dbc08',
-  [Network.MATIC_TESTNET]: '0xfce04dd232006d0da001f6d54bb5a7fc969dbc08',
-  [Network.BINANCE_COIN_MAINNET]: '0xab3e0c68e867f1c81a6660960fdfcf53402b33bf',
-  [Network.BINANCE_COIN_TESTNET]: '0x4c253d0f5de4dac61c5355aaa3efe0872dfadfff',
-  [Network.KLAYTN_MAINNET]: '0xab3e0c68e867f1c81a6660960fdfcf53402b33bf',
-  [Network.KLAYTN_TESTNET]: '0xb5567463c35dE682072A669425d6776B178Be3E4',
+  [Network.ETHEREUM]: '0x8A904F0Fb443D62B6A2835483b087aBECF93a137',
+  [Network.GOERLI]: '0xB112d79fc314E1F6901984F0b4fA7680057BFB63',
+  [Network.POLYGON]: '0xfce04dd232006d0da001f6d54bb5a7fc969dbc08',
+  [Network.MUMBAI]: '0xfce04dd232006d0da001f6d54bb5a7fc969dbc08',
+  [Network.BNB_SMART_CHAIN]: '0xab3e0c68e867f1c81a6660960fdfcf53402b33bf',
+  [Network.BNB_SMART_CHAIN_TESTNET]: '0x4c253d0f5de4dac61c5355aaa3efe0872dfadfff',
+  [Network.KLAYTN]: '0xab3e0c68e867f1c81a6660960fdfcf53402b33bf',
+  [Network.BAOBAB]: '0xb5567463c35dE682072A669425d6776B178Be3E4',
   [Network.BORA]: '0x797115bcdbD85DC865222724eD67d473CE168962',
   [Network.BORA_TESTNET]: '0x3d5cb6Be01f218CCA1Ec077028F2CFDC943A36f6',
-  [Network.NEAR]: 'facewallet.testnet',
+  [Network.NEAR]: 'TODO',
   [Network.NEAR_TESTNET]: 'facewallet.testnet',
 };
 
