@@ -1,17 +1,19 @@
 {
   "files": {
-    "main.css": "/face-sample-dapp/static/css/main.03000e3e.css",
-    "main.js": "/face-sample-dapp/static/js/main.fb98acf0.js",
+    "main.css": "/face-sample-dapp/static/css/main.ce0a1179.css",
+    "main.js": "/face-sample-dapp/static/js/main.3ba82889.js",
+    "static/js/1.f49f9e8f.chunk.js": "/face-sample-dapp/static/js/1.f49f9e8f.chunk.js",
     "static/media/logo.svg": "/face-sample-dapp/static/media/logo.7a23ae45110dc7397f2d9370a6d70925.svg",
     "static/media/external-link-line.svg": "/face-sample-dapp/static/media/external-link-line.a51b58b662c99d07928ebabab5fdc2ce.svg",
     "index.html": "/face-sample-dapp/index.html",
     "static/media/menu-close.svg": "/face-sample-dapp/static/media/menu-close.7b8c1d89596f2603f074982ef4e3e56c.svg",
     "static/media/menu-fill.svg": "/face-sample-dapp/static/media/menu-fill.ab45b5c921edbefe3993d306680ba5f0.svg",
-    "main.03000e3e.css.map": "/face-sample-dapp/static/css/main.03000e3e.css.map",
-    "main.fb98acf0.js.map": "/face-sample-dapp/static/js/main.fb98acf0.js.map"
+    "main.ce0a1179.css.map": "/face-sample-dapp/static/css/main.ce0a1179.css.map",
+    "main.3ba82889.js.map": "/face-sample-dapp/static/js/main.3ba82889.js.map",
+    "1.f49f9e8f.chunk.js.map": "/face-sample-dapp/static/js/1.f49f9e8f.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.03000e3e.css",
-    "static/js/main.fb98acf0.js"
+    "static/css/main.ce0a1179.css",
+    "static/js/main.3ba82889.js"
   ]
 }
