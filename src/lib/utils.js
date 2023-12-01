@@ -54,9 +54,9 @@ export function getProvider(network) {
     case Network.BAOBAB:
       return 'https://api.baobab.klaytn.net:8651/';
     case Network.BORA:
-      return 'https://tn.henesis.io/bora/mainnet?clientId=6e290e01ee92e21de4e52c0344bff48c';
+      return 'https://bora-mainnet.haechi.io';
     case Network.BORA_TESTNET:
-      return 'https://tn.henesis.io/bora/testnet?clientId=6e290e01ee92e21de4e52c0344bff48c';
+      return 'https://bora-testnet.haechi.io';
     case Network.SOLANA_DEVNET:
       return 'https://api.devnet.solana.com';
     case Network.SOLANA:
