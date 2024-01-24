@@ -1,4 +1,9 @@
-import { Blockchain, isEthlikeBlockchain, LoginProvider, networkToBlockchain } from '@haechi-labs/face-types';
+import {
+  Blockchain,
+  isEthlikeBlockchain,
+  LoginProvider,
+  networkToBlockchain,
+} from '@haechi-labs/face-types';
 import { BigNumber, providers } from 'ethers';
 import * as nearAPI from 'near-api-js';
 import { useCallback, useEffect, useState } from 'react';
@@ -20,14 +25,14 @@ function LoginWithFace() {
   const [loginProviders, setLoginProviders] = useState([]);
 
   const getAccountInfo = useCallback(async () => {
-    const blockchain = networkToBlockchain(face.network);
+    const blockchain = networkToBlockchain(face.internal.network);
     const user = await face.auth.getCurrentUser();
     let address, balance;
 
     if (blockchain === Blockchain.NEAR) {
       const nearProvider = face.near.getProvider();
       const publicKeys = await nearProvider.getPublicKeys();
-      const near = await nearAPI.connect(nearConfig(face.network));
+      const near = await nearAPI.connect(nearConfig(face.internal.network));
       address = Buffer.from(publicKeys[0].data).toString('hex');
       const account = await near.account(address);
       balance = await account
