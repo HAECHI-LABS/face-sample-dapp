@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/face-sample-dapp/static/css/main.ce0a1179.css",
-    "main.js": "/face-sample-dapp/static/js/main.5b61bf75.js",
+    "main.js": "/face-sample-dapp/static/js/main.6a88af50.js",
     "static/js/491.fad8be0c.chunk.js": "/face-sample-dapp/static/js/491.fad8be0c.chunk.js",
     "static/media/logo.svg": "/face-sample-dapp/static/media/logo.7a23ae45110dc7397f2d9370a6d70925.svg",
     "static/media/external-link-line.svg": "/face-sample-dapp/static/media/external-link-line.a51b58b662c99d07928ebabab5fdc2ce.svg",
@@ -9,11 +9,11 @@
     "static/media/menu-close.svg": "/face-sample-dapp/static/media/menu-close.7b8c1d89596f2603f074982ef4e3e56c.svg",
     "static/media/menu-fill.svg": "/face-sample-dapp/static/media/menu-fill.ab45b5c921edbefe3993d306680ba5f0.svg",
     "main.ce0a1179.css.map": "/face-sample-dapp/static/css/main.ce0a1179.css.map",
-    "main.5b61bf75.js.map": "/face-sample-dapp/static/js/main.5b61bf75.js.map",
+    "main.6a88af50.js.map": "/face-sample-dapp/static/js/main.6a88af50.js.map",
     "491.fad8be0c.chunk.js.map": "/face-sample-dapp/static/js/491.fad8be0c.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.ce0a1179.css",
-    "static/js/main.5b61bf75.js"
+    "static/js/main.6a88af50.js"
   ]
 }
