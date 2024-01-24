@@ -16,7 +16,7 @@ export function makeErc721Data(functionFragment, from, to, tokenId) {
 
 export function getExplorerUrl(network) {
   const explorerMap = {
-    [Network.GOERLI]: 'https://goerli.etherscan.io/tx/',
+    [Network.SEPOLIA]: 'https://sepolia.etherscan.io/tx/',
     [Network.ETHEREUM]: 'https://etherscan.io/tx/',
     [Network.MUMBAI]: 'https://mumbai.polygonscan.com/tx/',
     [Network.POLYGON]: 'https://polygonscan.com/tx/',
@@ -37,8 +37,8 @@ export function getProvider(network) {
   switch (network) {
     case Network.ROPSTEN:
       return 'https://eth-ropsten.alchemyapi.io/v2/UghLajTzDNBAO9EByRXWmIqduze2_jJ2';
-    case Network.GOERLI:
-      return 'https://ethereum-goerli-rpc.allthatnode.com';
+    case Network.SEPOLIA:
+      return 'https://rpc.sepolia.org';
     case Network.ETHEREUM:
       return 'https://mainnet.infura.io/v3/';
     case Network.MUMBAI:

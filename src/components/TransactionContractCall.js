@@ -14,7 +14,7 @@ import Message from './common/Message';
 
 const contractAddressMap = {
   [Network.ETHEREUM]: '',
-  [Network.GOERLI]: '0xF1e0C4576F4d7601B9aBDAe7eBbA8f9af3bEd249',
+  [Network.SEPOLIA]: '0xF1e0C4576F4d7601B9aBDAe7eBbA8f9af3bEd249',
   [Network.POLYGON]: '',
   [Network.MUMBAI]: '0xe63c2f4bdd0df2b18b0a4e0210d4b1e95a23dff9',
   [Network.BNB_SMART_CHAIN]: '',

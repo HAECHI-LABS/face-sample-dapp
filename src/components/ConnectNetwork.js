@@ -10,7 +10,7 @@ import Message from './common/Message';
 
 const networkList = [
   Network.ETHEREUM,
-  Network.GOERLI,
+  Network.SEPOLIA,
   Network.POLYGON,
   Network.MUMBAI,
   Network.BNB_SMART_CHAIN,
@@ -36,9 +36,9 @@ function ConnectNetwork() {
     const face = new Face({
       apiKey: resolveApiKey(network),
       network: network,
-      notificationOptions: { 
-        type: 'toast'
-      }
+      notificationOptions: {
+        type: 'toast',
+      },
     });
     setFace(face);
   };
@@ -55,8 +55,8 @@ function ConnectNetwork() {
     switch (network) {
       case Network.ETHEREUM:
         return 'Ethereum';
-      case Network.GOERLI:
-        return 'Goerli';
+      case Network.SEPOLIA:
+        return 'Sepolia';
       case Network.POLYGON:
         return 'Polygon';
       case Network.MUMBAI:

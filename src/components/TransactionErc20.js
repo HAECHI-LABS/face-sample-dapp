@@ -21,7 +21,7 @@ import Message from './common/Message';
 
 const erc20ContractAddressMap = {
   [Network.ETHEREUM]: '0x8A904F0Fb443D62B6A2835483b087aBECF93a137',
-  [Network.GOERLI]: '0xB112d79fc314E1F6901984F0b4fA7680057BFB63',
+  [Network.SEPOLIA]: '0xB112d79fc314E1F6901984F0b4fA7680057BFB63',
   [Network.POLYGON]: '0xfce04dd232006d0da001f6d54bb5a7fc969dbc08',
   [Network.MUMBAI]: '0xfce04dd232006d0da001f6d54bb5a7fc969dbc08',
   [Network.BNB_SMART_CHAIN]: '0xab3e0c68e867f1c81a6660960fdfcf53402b33bf',

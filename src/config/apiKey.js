@@ -9,7 +9,7 @@ export const resolveApiKey = (network) => {
     case Network.BORA:
     case Network.NEAR:
       return 'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC5jEuZU9r-SBfRHSx70ynSh-3Ew7SapJTbLqEUiA0ZJ2w3OUWeJPz8aYHX0Py78kNaoCCQa8JdAXsyyrrMLE8gmIqoFrjzFYmcUZ1sc5uP7ue8iDhZURYlauFC3npRiMvL__Q_CeIQq9MrFqvCLOZcU-WW-_sjRbslLGMmQWPjcQIDAQAB';
-    case Network.GOERLI:
+    case Network.SEPOLIA:
     case Network.MUMBAI:
     case Network.BNB_SMART_CHAIN_TESTNET:
     case Network.BAOBAB:
