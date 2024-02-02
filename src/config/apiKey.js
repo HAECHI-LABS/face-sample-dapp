@@ -1,6 +1,7 @@
 import { Network } from '@haechi-labs/face-types';
 
 export const resolveApiKey = (network) => {
+  // return 'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCZNotniFjZdpvDllzdS77MrAgsYnvLtXJq6hem5XeCL9ZfQQzEwMJoadXUJuRQbZHFexJaPvynMD3ufvxKKEfxWR-8j6YCIbSh8MLhypfL7FEtLsQAck-T4jiptiMVxuPhrDRmGgzC2Sik_qi0SiXXUebsPULgQyS85nPhtQ5lNwIDAQAB';
   switch (network) {
     case Network.ETHEREUM:
     case Network.POLYGON:
@@ -8,7 +9,7 @@ export const resolveApiKey = (network) => {
     case Network.KLAYTN:
     case Network.BORA:
     case Network.NEAR:
-      return 'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC5jEuZU9r-SBfRHSx70ynSh-3Ew7SapJTbLqEUiA0ZJ2w3OUWeJPz8aYHX0Py78kNaoCCQa8JdAXsyyrrMLE8gmIqoFrjzFYmcUZ1sc5uP7ue8iDhZURYlauFC3npRiMvL__Q_CeIQq9MrFqvCLOZcU-WW-_sjRbslLGMmQWPjcQIDAQAB';
+      return 'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDFhGcETETTZVrysoeadS_HGjY3p_jxFkZMR3aE2Sy-d7kjn_WJLYd5f3voEK9mbmLvglt3SGLw08xh_mVFD3rP8QoCNmjkyCbMIeszpCtudAAq1Ar37ZWCKQArWlhXB9EtTU9e3E4FBcBW9vqaPxiT8sk2MBFkCeinNSDHTdQ2uwIDAQAB';
     case Network.SEPOLIA:
     case Network.MUMBAI:
     case Network.BNB_SMART_CHAIN_TESTNET:

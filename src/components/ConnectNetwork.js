@@ -1,4 +1,5 @@
 import { Face, Network } from '@haechi-labs/face-sdk';
+import { Env } from '@haechi-labs/face-types';
 import { useRecoilState } from 'recoil';
 
 import { resolveApiKey } from '../config/apiKey';
@@ -39,7 +40,9 @@ function ConnectNetwork() {
       notificationOptions: {
         type: 'toast',
       },
+      env: Env.StageTest,
     });
+    console.log(face.internal);
     setFace(face);
   };
 
