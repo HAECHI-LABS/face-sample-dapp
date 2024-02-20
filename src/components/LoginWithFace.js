@@ -271,30 +271,30 @@ function LoginWithFace() {
                     }}>
                   disconnect wallet
                 </Button>
+                <Button
+                    onClick={async ()=>{
+                      const faceChainId = await kit.face.getChainId()
+                      console.log("faceChainId", faceChainId)
+                      const connectedWallet = await kit.connect();
+                      console.log('Kit connect response:', connectedWallet);  // <- Connected wallet has chainId = 20197
+
+                      const baseProvider = await connectedWallet.connector.getProvider()
+                      console.log("baseProvider", baseProvider)               // <- The base provider has chainId = 1
+                      const provider = new providers.Web3Provider(
+                          baseProvider
+                      );
+                      console.log("provider", provider)                       // <- Cannot force the chainId
+
+                      const signer = provider.getSigner();
+                      const blk = await provider.getBlock("latest")
+                      console.log(blk)
+
+                    }}>Test Kit Result ( show in console )
+                </Button>
               </>
           )}
         </>
       )}
-      <Button
-      onClick={async ()=>{
-        const faceChainId = await kit.face.getChainId()
-        console.log("faceChainId", faceChainId)
-        const connectedWallet = await kit.connect();
-        console.log('Kit connect response:', connectedWallet);  // <- Connected wallet has chainId = 20197
-
-        const baseProvider = await connectedWallet.connector.getProvider()
-        console.log("baseProvider", baseProvider)               // <- The base provider has chainId = 1
-        const provider = new providers.Web3Provider(
-            baseProvider
-        );
-        console.log("provider", provider)                       // <- Cannot force the chainId
-
-        const signer = provider.getSigner();
-        const blk = await provider.getBlock("latest")
-        console.log(blk)
-
-      }}>Test Kit Result ( show in console )
-      </Button>
     </Box>
   );
 }
