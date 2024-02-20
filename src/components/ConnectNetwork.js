@@ -22,6 +22,8 @@ const networkList = [
   Network.BORA_TESTNET,
   Network.NEAR,
   Network.NEAR_TESTNET,
+  Network.SAND_VERSE,
+  Network.OASYS_TESTNET
 ];
 
 const title = 'Connect Network';
@@ -40,7 +42,7 @@ function ConnectNetwork() {
       notificationOptions: {
         type: 'toast',
       },
-      env: Env.StageTest,
+      env: Env.ProdTest,
     });
     console.log(face.internal);
     setFace(face);
@@ -80,6 +82,10 @@ function ConnectNetwork() {
         return 'NEAR';
       case Network.NEAR_TESTNET:
         return 'NEAR Testnet';
+      case Network.SAND_VERSE:
+        return 'Sand Verse'
+      case Network.OASYS_TESTNET:
+        return 'Oasys Testnet'
       default:
         throw new Error('unsupported network error');
     }
